@@ -4,10 +4,15 @@
 class Library
 {
     protected :
+        static Library *singleton;  //Pointer to singleton
+        Library() = default;  //Private constructor
         vector<Model*>* listModels = new vector<Model*>;
     public :
-        Library() = default;
+        static Library* getInstance() noexcept {return singleton;}
+
         ~Library() = default;
+        Library(const Library&) = delete;
+        Library& operator=(const Library&) = delete;
 
         vector<Model*>* getListModels();
 };
