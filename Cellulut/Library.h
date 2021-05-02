@@ -8,6 +8,8 @@ class Library
     public :
         Library() = default;
         ~Library() = default;
+
+        vector<Model*>* getListModels();
 };
 
 

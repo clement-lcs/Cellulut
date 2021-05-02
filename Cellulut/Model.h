@@ -10,6 +10,12 @@ class Model
     public :
         Model(string _name = "");
         ~Model() = default;
+
+        string getName() const;
+        vector<State*>* getListStates() const;
+        Grid* getGrid() const;
+
+        void setName(string _name);
 };
 
 

@@ -10,6 +10,14 @@ class Grid
     public :
         Grid(unsigned int _length = 0, unsigned int _width = 0);
         ~Grid() = default;
+
+        unsigned int getLength() const;
+        unsigned int getWidth() const;
+        Cell** getlistCells() const;
+
+        void setlistCells(Cell** _listCells);
+        void setLength(unsigned int _length);
+        void setWidth(unsigned int _width);
 };
 
 
