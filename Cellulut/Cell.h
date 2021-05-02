@@ -10,6 +10,7 @@ class Cell
     public :
         Cell() = default;
         ~Cell() = default;
+        Cell(int X, int Y): x(X), y(Y), state(nullptr){};
 };
 
 

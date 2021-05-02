@@ -1,6 +1,8 @@
 #ifndef MAIN_H_INCLUDED
 #define MAIN_H_INCLUDED
 
+#define MAX_STATE 8
+
 #include<iostream>
 #include<string>
 #include<vector>

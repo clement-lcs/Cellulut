@@ -8,7 +8,7 @@ class State
         string color;
         int index;
     public :
-        State() = default;
+        State(string _label = "", string _color = "", int _index = 0);
         ~State() = default;
 };
 

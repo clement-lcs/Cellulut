@@ -8,7 +8,7 @@ class Grid
         unsigned int width;
         Cell** listCells;
     public :
-        Grid() = default;
+        Grid(unsigned int _length = 0, unsigned int _width = 0);
         ~Grid() = default;
 };
 

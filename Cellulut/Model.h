@@ -8,7 +8,7 @@ class Model
         vector<State*>* listStates;
         Grid* grid;
     public :
-        Model() = default;
+        Model(string _name = "");
         ~Model() = default;
 };
 
