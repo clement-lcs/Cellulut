@@ -15,6 +15,9 @@ class Library
         Library& operator=(const Library&) = delete;
 
         vector<Model*>* getListModels();
+
+        void add_Model(Model* new_model);
+        void del_Model(Model* _model);
 };
 
 
