@@ -16,6 +16,10 @@ class Model
         Grid* getGrid() const;
 
         void setName(string _name);
+
+        void init_Grid(int width, int length);
+        void add_State(State* new_state);
+        void del_State(State* _state);
 };
 
 
