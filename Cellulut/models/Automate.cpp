@@ -14,8 +14,8 @@ Grid* Automate::getGrid() const{return grid;}
 void Automate::init_Grid(int width, int length)
 {
 
-    grid->setWidth(width);
-    grid->setLength(length);
+    grid->setRowCount(width);
+    grid->setColumnCount(length);
     grid->setlistCells(new Cell*[width]);
     for (int i=0; i < width; i++)
     {

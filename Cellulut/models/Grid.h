@@ -4,23 +4,23 @@
 #include "main.h"
 #include "models/Cell.h"
 
-class Grid
+#include <QTableWidget>
+
+class Grid : public QTableWidget
 {
     protected :
-        unsigned int length;
-        unsigned int width;
         Cell** listCells;
     public :
-        Grid(unsigned int _length = 0, unsigned int _width = 0);
+        Grid(int rows = 0,int columns = 0);
         ~Grid() = default;
 
-        unsigned int getLength() const;
-        unsigned int getWidth() const;
+        //int rowCount() const; // Héritage
+        //int columnCount() const; // Héritage
         Cell** getlistCells() const;
 
         void setlistCells(Cell** _listCells);
-        void setLength(unsigned int _length);
-        void setWidth(unsigned int _width);
+        //void setRowCount(int rows); // Héritage
+        //void setColumnCount(int columns); // Héritage
 };
 
 

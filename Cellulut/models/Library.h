@@ -7,8 +7,8 @@
 class Library
 {
     protected :
-        static Library *singleton;  //Pointer to singleton
-        Library() = default;  //Private constructor
+        static Library* singleton;  // Pointer to singleton
+        Library() = default;  // Private constructor
         vector<Model*>* listModels = new vector<Model*>;
     public :
         static Library* getInstance() noexcept {return singleton;}
