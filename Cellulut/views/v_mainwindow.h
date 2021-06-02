@@ -24,9 +24,9 @@ public:
 
     Ui::V_MainWindow* getUi() const {return this->ui;}
 
-   public slots:
-    void onLoadTemplate();
-    void onCreateTemplate();
+private slots:
+    void on_actionLoadTemplate_clicked();
+    void on_actionCreateTemplate_clicked();
 };
 
 #endif // V_MAINWINDOW_H

@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
     C_MainWindow *mainWindowController = new C_MainWindow(&app);
 
     // Initialize event binding, etc..
-    mainWindowController->init();
 
     // Show the view
     mainWindowController->getView()->show();

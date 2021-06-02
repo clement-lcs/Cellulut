@@ -15,7 +15,7 @@ private:
     QApplication* qapp;
     V_MainWindow* view; /*!< View */
 
-    public:
+public:
     C_MainWindow(QApplication* app);
     ~C_MainWindow();
 

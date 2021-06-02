@@ -12,6 +12,8 @@ SOURCES += \
     models/Rule.cpp \
     models/State.cpp \
     models/Surrounding.cpp \
+    views/v_createtemplateform.cpp \
+    views/v_loadtemplateform.cpp \
     views/v_mainwindow.cpp
 
 HEADERS += \
@@ -25,8 +27,12 @@ HEADERS += \
     models/Rule.h \
     models/State.h \
     models/Surrounding.h \
+    views/v_createtemplateform.h \
+    views/v_loadtemplateform.h \
     views/v_mainwindow.h
 
 FORMS += \
+    views/v_createtemplateform.ui \
+    views/v_loadtemplateform.ui \
     views/v_mainwindow.ui
 

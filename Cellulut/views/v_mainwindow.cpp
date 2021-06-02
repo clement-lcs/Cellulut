@@ -13,17 +13,14 @@ V_MainWindow::~V_MainWindow()
     delete this->ui;
 }
 
-void V_MainWindow::onLoadTemplate()
+void V_MainWindow::on_actionLoadTemplate_clicked()
 {
-    // This method is called when the button "loadTemplate" is clicked
-    // This method is just a bridge to the correct controller method
     this->controller->onLoadTemplate();
 }
 
-void V_MainWindow::onCreateTemplate()
+
+void V_MainWindow::on_actionCreateTemplate_clicked()
 {
-    // This method is called when the button "createTemplate" is clicked
-    // This method is just a bridge to the correct controller method
     this->controller->onCreateTemplate();
 }
 
