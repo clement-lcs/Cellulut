@@ -1,5 +1,7 @@
-#ifndef STATE_H_INCLUDED
-#define STATE_H_INCLUDED
+#ifndef STATE_H
+#define STATE_H
+
+#include "main.h"
 
 class State
 {
@@ -18,4 +20,4 @@ class State
         void setIndex(int _index);
 };
 
-#endif // STATE_H_INCLUDED
+#endif // STATE_H

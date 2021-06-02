@@ -1,5 +1,7 @@
-#ifndef SURROUNDING_H_INCLUDED
-#define SURROUNDING_H_INCLUDED
+#ifndef SURROUNDING_H
+#define SURROUNDING_H
+
+#include "main.h"
 
 class Surrounding
 {
@@ -10,4 +12,4 @@ class Surrounding
 };
 
 
-#endif // SURROUNDING_H_INCLUDED
+#endif // SURROUNDING_H

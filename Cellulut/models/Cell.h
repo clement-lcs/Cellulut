@@ -1,5 +1,8 @@
-#ifndef CELL_H_INCLUDED
-#define CELL_H_INCLUDED
+#ifndef CELL_H
+#define CELL_H
+
+#include "main.h"
+#include "models/State.h"
 
 class Cell
 {
@@ -22,4 +25,4 @@ class Cell
 };
 
 
-#endif // CELL_H_INCLUDED
+#endif // CELL_H

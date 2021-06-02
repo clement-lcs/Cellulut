@@ -1,5 +1,8 @@
-#ifndef GRID_H_INCLUDED
-#define GRID_H_INCLUDED
+#ifndef GRID_H
+#define GRID_H
+
+#include "main.h"
+#include "models/Cell.h"
 
 class Grid
 {
@@ -21,4 +24,4 @@ class Grid
 };
 
 
-#endif // GRID_H_INCLUDED
+#endif // GRID_H

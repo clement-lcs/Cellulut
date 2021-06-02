@@ -1,5 +1,7 @@
-#ifndef RULE_H_INCLUDED
-#define RULE_H_INCLUDED
+#ifndef RULE_H
+#define RULE_H
+
+#include "main.h"
 
 class Rule
 {
@@ -10,4 +12,4 @@ class Rule
 };
 
 
-#endif // RULE_H_INCLUDED
+#endif // RULE_H

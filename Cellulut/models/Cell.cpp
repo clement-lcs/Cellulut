@@ -1,4 +1,5 @@
 #include "main.h"
+#include "models/Cell.h"
 
 int Cell::getX() const{return x;}
 

@@ -1,5 +1,8 @@
-#ifndef LIBRARY_H_INCLUDED
-#define LIBRARY_H_INCLUDED
+#ifndef LIBRARY_H
+#define LIBRARY_H
+
+#include "main.h"
+#include "models/Model.h"
 
 class Library
 {
@@ -21,4 +24,4 @@ class Library
 };
 
 
-#endif // LIBRARY_H_INCLUDED
+#endif // LIBRARY_H

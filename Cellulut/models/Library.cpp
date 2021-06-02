@@ -1,4 +1,5 @@
 #include "main.h"
+#include "models/Library.h"
 
 Library* Library::singleton = new Library;
 
@@ -10,11 +11,12 @@ void Library::add_Model(Model* new_model)
     {
         if(listModels->at(i) == new_model)
         {
-            throw invalid_argument("This model already exists \n");
+            //throw invalid_argument("This model already exists \n");
         }
     }
     this->listModels->push_back(new_model);
-    cout<<"Model added"<<endl;
+    //cout<<"Model added"<<endl;
+    return;
 }
 
 void Library::del_Model(Model* _model)
@@ -24,7 +26,7 @@ void Library::del_Model(Model* _model)
         if(listModels->at(i) == _model)
         {
             listModels->erase(listModels->begin()+i);
-            cout<<"Model deleted"<<endl;
+            //cout<<"Model deleted"<<endl;
             return;
         }
     }
