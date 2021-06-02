@@ -12,8 +12,7 @@ SOURCES += \
     models/Rule.cpp \
     models/State.cpp \
     models/Surrounding.cpp \
-    views/v_mainwindow.cpp \
-    views/v_startmenu.cpp
+    views/v_mainwindow.cpp
 
 HEADERS += \
     controllers/c_mainwindow.h \
@@ -26,10 +25,8 @@ HEADERS += \
     models/Rule.h \
     models/State.h \
     models/Surrounding.h \
-    views/v_mainwindow.h \
-    views/v_startmenu.h
+    views/v_mainwindow.h
 
 FORMS += \
-    views/v_mainwindow.ui \
-    views/v_startmenu.ui
+    views/v_mainwindow.ui
 

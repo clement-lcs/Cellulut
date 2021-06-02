@@ -7,7 +7,7 @@ vector<Model*>* Library::getListModels(){return listModels;}
 
 void Library::add_Model(Model* new_model)
 {
-    for(int i = 0; i < listModels->size(); i++)
+    for(unsigned int i = 0; i < listModels->size(); i++)
     {
         if(listModels->at(i) == new_model)
         {
@@ -21,7 +21,7 @@ void Library::add_Model(Model* new_model)
 
 void Library::del_Model(Model* _model)
 {
-    for(int i = 0; i < listModels->size(); i++)
+    for(unsigned int i = 0; i < listModels->size(); i++)
     {
         if(listModels->at(i) == _model)
         {

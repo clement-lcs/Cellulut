@@ -3,33 +3,29 @@
 
 #include "views/v_mainwindow.h"
 
+class V_MainWindow;
+
 /*!
  *  Classe faisant le lien entre modèles et vues
  */
 
-class c_mainwindow
+class C_MainWindow
 {
-    protected:
+private:
+    QApplication* qapp;
+    V_MainWindow* view; /*!< View */
+
     public:
+    C_MainWindow(QApplication* app);
+    ~C_MainWindow();
+
+    V_MainWindow* getView() const { return view; }
+
+    void init();
+
+    void bindActions();
+    void onLoadTemplate();
+    void onCreateTemplate();
 };
-
-
-/*
-class v_mainwindow;
-
-class c_mainwindow
-{
-    protected:
-        QApplication* qapp;
-        v_mainwindow* view; // View
-        Cellulut* app; // Model
-    public:
-        c_mainwindow(QApplication* app);
-
-        v_mainwindow* getView() const { return view; }
-        Cellulut* getApp() const { return app; }
-        QApplication* getQApp() const { return qapp; }
-};
-*/
 
 #endif // C_MAINWINDOW_H

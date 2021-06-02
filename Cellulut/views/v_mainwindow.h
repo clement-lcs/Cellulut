@@ -2,21 +2,31 @@
 #define V_MAINWINDOW_H
 
 #include <QMainWindow>
+#include "../controllers/c_mainwindow.h"
 
 namespace Ui {
-class MainWindow;
+class V_MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class C_MainWindow;
+
+class V_MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
 private:
-    Ui::MainWindow *ui;
+    Ui::V_MainWindow *ui;
+    C_MainWindow *controller;
+
+public:
+    explicit V_MainWindow(QWidget *parent = 0, C_MainWindow *c = 0);
+    ~V_MainWindow();
+
+    Ui::V_MainWindow* getUi() const {return this->ui;}
+
+   public slots:
+    void onLoadTemplate();
+    void onCreateTemplate();
 };
 
 #endif // V_MAINWINDOW_H

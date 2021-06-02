@@ -21,7 +21,7 @@ void Model::add_State(State* new_state)
     {
         //throw out_of_range("Maximum number of states reached");
     }
-    for (int i =0; i < listStates->size(); i++)
+    for (unsigned int i =0; i < listStates->size(); i++)
     {
         if(listStates->at(i)->getIndex() == new_state->getIndex())
         {
@@ -35,7 +35,7 @@ void Model::add_State(State* new_state)
 
 void Model::del_State(State* _state)
 {
-    for(int i = 0; i < listStates->size(); i++)
+    for(unsigned int i = 0; i < listStates->size(); i++)
     {
         if(listStates->at(i) == _state)
         {
