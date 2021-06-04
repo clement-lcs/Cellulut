@@ -1,6 +1,6 @@
 #include "main.h"
 #include <QApplication>
-#include "controllers/c_mainwindow.h"
+#include "controllers/C_MainWindow.h"
 
 
 int main(int argc, char *argv[])
@@ -9,8 +9,7 @@ int main(int argc, char *argv[])
 
     // Instantiate main window controller and display view
     C_MainWindow *mainWindowController = new C_MainWindow(&app);
-
-    // Initialize event binding, etc..
+    mainWindowController->init();
 
     // Show the view
     mainWindowController->getView()->show();

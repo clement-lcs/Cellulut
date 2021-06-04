@@ -10,5 +10,6 @@ using namespace std;
 #include <sstream>
 #include <vector>
 #include <typeinfo>
+#include <QDebug>
 
 #endif // MAIN

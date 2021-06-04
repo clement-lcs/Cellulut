@@ -1,21 +1,12 @@
 #include "main.h"
 #include "models/Model.h"
 
-Model::Model(string _name)
+Model::Model(int _id, string _title, string _description, string _author, string _dateOfCreation) : id(_id), title(_title), description(_description), author(_author), dateOfCreation(_dateOfCreation)
 {
-    name = _name;
-    listStates = new vector<State*>;
-    State* default_state = new State("default","white");
-    add_State(default_state);
+    this->listOfStates = new vector<State*>;
 }
 
-string Model::getName() const{return name;}
-
-vector<State*>* Model::getListStates() const{return listStates;}
-
-void Model::setName(string _name){name = _name;}
-
-void Model::add_State(State* new_state)
+/*void Model::add_State(State* new_state)
 {
     if(listStates->size() >= MAX_STATE)
     {
@@ -44,5 +35,5 @@ void Model::del_State(State* _state)
             return;
         }
     }
-}
+}*/
 

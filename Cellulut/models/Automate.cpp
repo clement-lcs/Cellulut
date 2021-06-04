@@ -3,7 +3,7 @@
 
 Automate::Automate()
 {
-    model = new Model();
+    //model = new Model();
     grid = new Grid();
 }
 
@@ -27,7 +27,7 @@ void Automate::init_Grid(int width, int length)
         {
             grid->getlistCells()[i][j].setX(i);
             grid->getlistCells()[i][j].setY(j);
-            grid->getlistCells()[i][j].setState(getModel()->getListStates()->at(0));
+            //grid->getlistCells()[i][j].setState(getModel()->getListStates()->at(0));
         }
     }
     return;

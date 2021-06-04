@@ -1,5 +1,5 @@
 #include "main.h"
-#include "v_mainwindow.h"
+#include "V_MainWindow.h"
 #include "ui_v_mainwindow.h"
 
 V_MainWindow::V_MainWindow(QWidget *parent, C_MainWindow *c) : QMainWindow(parent), ui(new Ui::V_MainWindow)
@@ -13,14 +13,11 @@ V_MainWindow::~V_MainWindow()
     delete this->ui;
 }
 
-void V_MainWindow::on_actionLoadTemplate_clicked()
-{
-    this->controller->onLoadTemplate();
-}
+// UI EVENTS BINDING
 
-
-void V_MainWindow::on_actionCreateTemplate_clicked()
+void V_MainWindow::on_actionLancer_une_simulation_triggered()
 {
-    this->controller->onCreateTemplate();
+    qInfo() << "V_MainWindow::on_actionLancer_une_simulation_triggered()";
+    this->controller->onActionLaunchSimulation();
 }
 

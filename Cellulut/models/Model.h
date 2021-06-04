@@ -6,20 +6,25 @@
 
 class Model
 {
-    protected :
-        string name;
-        vector<State*>* listStates;
-    public :
-        Model(string _name = "");
-        ~Model() = default;
+protected :
+    int id;
+    std::string title;
+    std::string description;
+    std::string author;
+    std::string dateOfCreation;
+    vector<State*>* listOfStates;
+public :
+    Model(int id, std::string title, std::string description, std::string author, std::string dateOfCreation);
+    ~Model() = default;
 
-        string getName() const;
-        vector<State*>* getListStates() const;
+    int getId()const{return this->id;}
+    void setId(int _id){this->id=_id;}
+    std::string getTitle()const{return this->title;}
+    vector<State*>* getListOfStates() const{return this->listOfStates;}
+    void setListOfStates(vector<State*>* _listOfStates){this->listOfStates=_listOfStates;}
 
-        void setName(string _name);
+    QString getTitleAsQString() const{return QString::fromUtf8(this->title.c_str());}
 
-        void add_State(State* new_state);
-        void del_State(State* _state);
 };
 
 

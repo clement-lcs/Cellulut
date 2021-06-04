@@ -1,12 +1,16 @@
 #ifndef C_MAINWINDOW_H
 #define C_MAINWINDOW_H
 
-#include "views/v_mainwindow.h"
+#include "views/V_MainWindow.h"
+#include "models/managers/databasemanager.h"
+#include "models/managers/modelsmanager.h"
+#include "models/managers/statesmanager.h"
+#include "models/Cellulut.h"
 
 class V_MainWindow;
 
 /*!
- *  Classe faisant le lien entre modèles et vues
+ *  Classe faisant le lien entre modÃ¨les et vues
  */
 
 class C_MainWindow
@@ -14,7 +18,7 @@ class C_MainWindow
 private:
     QApplication* qapp;
     V_MainWindow* view; /*!< View */
-
+    Cellulut *app;
 public:
     C_MainWindow(QApplication* app);
     ~C_MainWindow();
@@ -23,9 +27,7 @@ public:
 
     void init();
 
-    void bindActions();
-    void onLoadTemplate();
-    void onCreateTemplate();
+    void onActionLaunchSimulation();
 };
 
 #endif // C_MAINWINDOW_H
