@@ -31,8 +31,8 @@ void V_SimulationConfigurationWidget::on_comboBox_currentIndexChanged(int index)
     }
 
     Model *model = this->app->getListOfModels()->at(index);
-    vector<State*> *listOfStates = model->getListOfStates();
-    int statesTableRowCount = listOfStates->size();
+    vector<State*> *listOfStates = model->getListStates();
+    unsigned int statesTableRowCount = listOfStates->size();
 
     this->statesTableModel = new QStandardItemModel(statesTableRowCount, 3, this);
     this->statesTableModel->setHorizontalHeaderLabels(this->statesTableHeaders.split(","));

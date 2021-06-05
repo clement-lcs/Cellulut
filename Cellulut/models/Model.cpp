@@ -1,12 +1,52 @@
 #include "main.h"
 #include "models/Model.h"
 
-Model::Model(int _id, string _title, string _description, string _author, string _dateOfCreation) : id(_id), title(_title), description(_description), author(_author), dateOfCreation(_dateOfCreation)
+Model::Model(unsigned int _id, string _title, string _description, string _author, string _date) : id(_id), title(_title), description(_description), author(_author), date_creation(_date)
 {
-    this->listOfStates = new vector<State*>;
+    this->listStates = new vector<State*>;
 }
 
-/*void Model::add_State(State* new_state)
+
+unsigned int Model::getId() const{return this->id;}
+
+string Model::getTitle() const{return this->title;}
+
+string Model::getDescription() const{return this->title;}
+
+string Model::getAuthor() const{return this->title;}
+
+string Model::getDate() const{return this->title;}
+
+vector<State*>* Model::getListStates() const{return this->listStates;}
+
+
+void Model::setId(unsigned int _id){this->id = _id;}
+
+void Model::setTitle(string _title){this->title = _title;}
+
+void Model::setDescription(string _description){this->description = _description;}
+
+void Model::setAuthor(string _author){this->author = _author;}
+
+void Model::setDate(string _date){this->date_creation = _date;}
+
+void Model::setListStates(vector<State*>* _listStates){this->listStates = _listStates;}
+
+
+State* Model::get_State(unsigned int _index)
+{
+    for (unsigned int i =0; i < listStates->size(); i++)
+    {
+        if(listStates->at(i)->getIndex() == _index)
+        {
+            return listStates->at(i);
+        }
+    }
+    //cout<<"This state index doesn't exists"<<endl;
+    return nullptr;
+}
+
+void Model::add_State(State* new_state)
 {
     if(listStates->size() >= MAX_STATE)
     {
@@ -35,5 +75,5 @@ void Model::del_State(State* _state)
             return;
         }
     }
-}*/
+}
 

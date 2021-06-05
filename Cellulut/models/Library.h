@@ -20,6 +20,7 @@ class Library
         vector<Model*>* getListModels();
 
         void add_Model(Model* new_model);
+        Model* get_Model(unsigned int model_id);
         void del_Model(Model* _model);
 };
 

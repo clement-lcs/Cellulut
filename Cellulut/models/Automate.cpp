@@ -3,17 +3,24 @@
 
 Automate::Automate()
 {
-    //model = new Model();
+    model = new Model();
     grid = new Grid();
+    historic = new vector<int**>;
 }
+
 
 Model* Automate::getModel() const{return model;}
 
 Grid* Automate::getGrid() const{return grid;}
 
-void Automate::init_Grid(int width, int length)
-{
 
+void Automate::setModel(Model* _model){this->model = _model;}
+
+void Automate::setGrid(Grid* _grid){this->grid = _grid;}
+
+
+/*void Automate::init_Grid()
+{
     grid->setRowCount(width);
     grid->setColumnCount(length);
     grid->setlistCells(new Cell*[width]);
@@ -31,4 +38,4 @@ void Automate::init_Grid(int width, int length)
         }
     }
     return;
-}
+}*/

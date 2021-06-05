@@ -19,6 +19,19 @@ void Library::add_Model(Model* new_model)
     return;
 }
 
+Model* Library::get_Model(unsigned int model_id)
+{
+    for(unsigned int i = 0; i < listModels->size(); i++)
+    {
+        if(listModels->at(i)->getId() == model_id)
+        {
+            return listModels->at(i);
+        }
+    }
+    //cout<<"This model doesn't exists"
+    return nullptr;
+}
+
 void Library::del_Model(Model* _model)
 {
     for(unsigned int i = 0; i < listModels->size(); i++)
@@ -30,4 +43,6 @@ void Library::del_Model(Model* _model)
             return;
         }
     }
+    //cout<<"This model doesn't exists"
+    return;
 }

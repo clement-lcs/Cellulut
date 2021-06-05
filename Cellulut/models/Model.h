@@ -2,29 +2,47 @@
 #define MODEL_H
 
 #include "main.h"
+#include "models/Rule_int.h"
+#include "models/Rule_ext.h"
 #include "models/State.h"
+#include "models/Surrounding.h"
 
 class Model
 {
-protected :
-    int id;
-    std::string title;
-    std::string description;
-    std::string author;
-    std::string dateOfCreation;
-    vector<State*>* listOfStates;
-public :
-    Model(int id, std::string title, std::string description, std::string author, std::string dateOfCreation);
-    ~Model() = default;
+    protected :
+        unsigned int id;
+        string title;
+        string description;
+        string author;
+        string date_creation;
+        vector<State*>* listStates;
+        Surrounding* surrounding;
+        vector<Rule_int>* rule_int;
+        vector<Rule_ext>* rule_ext;
+    public :
+        Model() = default;
+        Model(unsigned int id, string title, string description, string author, string dateOfCreation);
+        ~Model() = default;
 
-    int getId()const{return this->id;}
-    void setId(int _id){this->id=_id;}
-    std::string getTitle()const{return this->title;}
-    vector<State*>* getListOfStates() const{return this->listOfStates;}
-    void setListOfStates(vector<State*>* _listOfStates){this->listOfStates=_listOfStates;}
+        unsigned int getId() const;
+        string getTitle() const;
+        string getDescription() const;
+        string getAuthor() const;
+        string getDate() const;
+        vector<State*>* getListStates() const;
 
-    QString getTitleAsQString() const{return QString::fromUtf8(this->title.c_str());}
+        void setId(unsigned int _id);
+        void setTitle(string _title);
+        void setDescription(string _title);
+        void setAuthor(string _title);
+        void setDate(string _title);
+        void setListStates(vector<State*>* _listStates);
 
+        State* get_State(unsigned int _index);
+        void add_State(State* new_state);
+        void del_State(State* _state);
+
+        QString getTitleAsQString() const{return QString::fromUtf8(this->title.c_str());}
 };
 
 

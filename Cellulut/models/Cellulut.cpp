@@ -28,6 +28,6 @@ void Cellulut::initListOfModels(){
     for(unsigned int i = 0; i < this->listOfModels->size(); i++){
         Model *model = this->listOfModels->at(i);
         vector<State*> *listOfStates = this->statesManager->findAllStatesByModelID(model->getId());
-        model->setListOfStates(listOfStates);
+        model->setListStates(listOfStates);
     }
 }

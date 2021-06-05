@@ -6,22 +6,23 @@
 class State
 {
 protected :
-    int index;
-    std::string color;
-    std::string label;
+    unsigned int index;
+    string color;
+    string label;
 public :
-    State(int index,  std::string color,  std::string label);
+    State(unsigned int index = 0,  string color = "",  string label = "");
     ~State() = default;
 
-    int getIndex() const {return this->index;}
-    void setIndex(int _index){this->index=_index;}
-    std::string getColor() const{return this->color;}
-    void setColor(std::string _color){this->color = _color;}
-    std::string getLabel() const{return this->label;}
-    void setLabel(std::string _label){this->label=_label;}
+    unsigned int getIndex() const;
+    string getColor() const;
+    string getLabel() const;
 
-    QString getColorAsQString() const{return QString::fromUtf8(this->color.c_str());}
-    QString getLabelAsQString() const{return QString::fromUtf8(this->label.c_str());}
+    void setIndex(unsigned int _index);
+    void setColor(string _color);
+    void setLabel(string _label);
+
+    QString getColorAsQString() const;
+    QString getLabelAsQString() const;
 };
 
 #endif // STATE_H

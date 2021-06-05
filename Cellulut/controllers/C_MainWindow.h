@@ -10,7 +10,7 @@
 class V_MainWindow;
 
 /*!
- *  Classe faisant le lien entre modÃ¨les et vues
+ *  Classe faisant le lien entre modèles et vues
  */
 
 class C_MainWindow

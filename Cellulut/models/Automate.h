@@ -10,6 +10,7 @@ class Automate
     protected :
         Model* model;
         Grid* grid;
+        vector<int**>* historic;
     public :
         Automate();
         ~Automate() = default;
@@ -17,7 +18,10 @@ class Automate
         Model* getModel() const;
         Grid* getGrid() const;
 
-        void init_Grid(int width, int length);
+        void setModel(Model* _model);
+        void setGrid(Grid* grid);
+
+        void init_Grid();
 };
 
 #endif // AUTOMATE_H
