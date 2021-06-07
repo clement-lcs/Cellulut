@@ -7,19 +7,21 @@ class Surrounding
 {
     protected :
         string name;
-        unsigned int diameter;
+        unsigned int radius;
         bool** interaction;
     public :
-        Surrounding(string _name = "", unsigned int _diameter = 0, bool** _interaction = nullptr);
+        Surrounding(string _name = "", unsigned int _radius = 1);
         ~Surrounding() = default;
 
         string getName() const;
-        unsigned int getDiameter() const;
+        unsigned int getRadius() const;
         bool** getInteraction() const;
 
         void setName(string _name);
-        void setDiameter(unsigned int _diameter);
+        void setRadius(unsigned int _radius);
         void setInteraction(bool** _interaction);
+
+        void afficher_surround();
 };
 
 
