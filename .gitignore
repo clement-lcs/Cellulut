@@ -36,3 +36,5 @@ build-Cellulut-Desktop_Qt_5_15_2_MinGW_64_bit-Debug
 *.depend
 *.layout
 *.user
+
+build-Cellulut-Desktop_Qt_6_1_0_MinGW_64_bit-Debug/
