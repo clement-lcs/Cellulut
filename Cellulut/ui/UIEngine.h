@@ -8,6 +8,7 @@
 #include "views/MainWindow.h"
 #include "views/MainMenuView.h"
 #include "views/SimulationView.h"
+#include "views/SimulationViewV2.h"
 #include "views/templates/CreateTemplateView.h"
 #include "views/templates/LoadTemplateView.h"
 

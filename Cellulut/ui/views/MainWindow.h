@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 #include "ui/UIEngine.h"
 
 namespace Ui {
@@ -31,6 +32,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     UIEngine* uiEngine;
+    void keyPressEvent(QKeyEvent* event);
 };
 
 #endif // MAINWINDOW_H

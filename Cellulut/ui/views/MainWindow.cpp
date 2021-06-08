@@ -16,6 +16,16 @@ MainWindow::~MainWindow()
     qInfo() << "MainWindow::~MainWindow - destructor";
 }
 
+void MainWindow::keyPressEvent(QKeyEvent* event)
+{
+    if(event->key() == Qt::Key_Escape)
+    {
+         QCoreApplication::quit();
+    }
+    else
+        QWidget::keyPressEvent(event);
+}
+
 
 void MainWindow::on_actionGoToSimulation_triggered()
 {

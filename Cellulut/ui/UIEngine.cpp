@@ -4,6 +4,7 @@ UIEngine::UIEngine(QApplication* _app) : qapp(_app)
 {
     this->insideUIForData = new InsideUIForData(this);
     this->mainWindow = new MainWindow(0,this);
+
     qInfo() << "UIEngine::UIEngine - constructor";
 }
 
@@ -24,7 +25,7 @@ void UIEngine::changeToMainMenuView(){
 
 
 void UIEngine::changeToSimulationView(){
-    SimulationView *simulationView = new SimulationView(0,this);
+    SimulationViewV2 *simulationView = new SimulationViewV2(0);
     this->mainWindow->setCentralWidget(simulationView);
 }
 

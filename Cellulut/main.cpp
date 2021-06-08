@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     dataEngine->setInsideUIForData(uiEngine->getInsideUIForData());
 
     uiEngine->start();
+    uiEngine->changeToSimulationView();
 
     return app.exec();
 }

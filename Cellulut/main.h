@@ -3,6 +3,9 @@
 
 #define MAX_STATE 8
 
+#define MIN_GRID_SIZE 21
+#define MAX_GRID_SIZE 251
+
 using namespace std;
 
 #include <string>
