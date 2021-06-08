@@ -1,18 +1,21 @@
 #include "main.h"
-#include <QApplication>
-#include "controllers/C_MainWindow.h"
 
+#include <QApplication>
+#include "data/DataEngine.h"
+#include "ui/UIEngine.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    // Instantiate main window controller and display view
-    C_MainWindow *mainWindowController = new C_MainWindow(&app);
-    mainWindowController->init();
+    DataEngine *dataEngine = new DataEngine();
+    UIEngine *uiEngine = new UIEngine(&app);
 
-    // Show the view
-    mainWindowController->getView()->show();
+    uiEngine->setInsideDataForUI(dataEngine->getInsideDataForUI());
+    dataEngine->setInsideUIForData(uiEngine->getInsideUIForData());
+
+    uiEngine->start();
+    uiEngine->changeToSimulationView();
 
     return app.exec();
 }
