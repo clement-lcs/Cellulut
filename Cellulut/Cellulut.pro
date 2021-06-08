@@ -11,8 +11,7 @@ SOURCES += \
     models/Grid.cpp \
     models/Library.cpp \
     models/Model.cpp \
-    models/Rule_ext.cpp \
-    models/Rule_int.cpp \
+    models/Rule.cpp \
     models/State.cpp \
     models/Surrounding.cpp \
     models/managers/DatabaseManager.cpp \
@@ -38,8 +37,7 @@ HEADERS += \
     models/Grid.h \
     models/Library.h \
     models/Model.h \
-    models/Rule_ext.h \
-    models/Rule_int.h \
+    models/Rule.h \
     models/State.h \
     models/Surrounding.h \
     models/managers/DatabaseManager.h \
