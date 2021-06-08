@@ -3,17 +3,13 @@
 
 Surrounding::Surrounding(string _name, unsigned int _radius): name(_name), radius(_radius)
 {
-    unsigned int size = this->radius * 2 + 1;
-    this->interaction = new bool*[size];
+    //this->interaction = new bool*[size];
+    this->interaction = new vector<bool>();
+}
 
-    for (unsigned int i = 0; i < size; i++)
-    {
-        this->interaction[i] = new bool[size];
-        for (unsigned int j = 0; j < size; j++)
-        {
-            interaction[i][j] = false;
-        }
-    }
+Surrounding::~Surrounding()
+{
+    delete[] this->interaction;
 }
 
 
@@ -21,27 +17,34 @@ string Surrounding::getName() const{return this->name;}
 
 unsigned int Surrounding::getRadius() const{return this->radius;}
 
-bool** Surrounding::getInteraction() const{return this->interaction;}
+vector<bool>* Surrounding::getInteraction() const{return this->interaction;}
 
 
 void Surrounding::setName(string _name){this->name = _name;}
 
 void Surrounding::setRadius(unsigned int _radius){this->radius = _radius;}
 
-void Surrounding::setInteraction(bool **_interaction){this->interaction = _interaction;}
+void Surrounding::setInteraction(vector<bool>*_interaction){this->interaction = _interaction;}
 
 void Surrounding::afficher_surround()
 {
-    for (unsigned int i = 0; i < radius*2+1; i++)
+    unsigned int size = radius * 2 + 1;
+    for (unsigned int i = 0; i < size; i++)
     {
-        for (unsigned int j = 0; j < radius*2+1; j++)
+        for (unsigned int j = 0; j < size; j++)
         {
-            if (interaction[i][j])
+            if (this->interaction->at(i*size+j))
                 cout<<"True ";
             else
                 cout<<"False ";
         }
-        cout<<endl;
+        cout << "\n";
     }
+}
 
+void Surrounding::addInteraction(vector<bool> _interactionLine){
+    cout << "Adding " << _interactionLine.size() << "\n";
+    for(unsigned int i = 0; i < _interactionLine.size() ; i++){
+        this->interaction->push_back(_interactionLine.at(i));
+    }
 }

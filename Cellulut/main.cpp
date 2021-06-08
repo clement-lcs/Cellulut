@@ -17,14 +17,11 @@ void ajout_donnee()
 
     // Surrounding
     Surrounding* game_life_surround = new Surrounding("Jeu de la vie");
-    bool** test = new bool*[3];
-    bool test1[3] = {false,true,false};
-    bool test2[3] = {true,true,true};
-    test[0] = test1;
-    test[1] = test2;
-    test[2] = test1;
-    game_life_surround->setInteraction(test);
+    game_life_surround->addInteraction({false, true, false});
+    game_life_surround->addInteraction({true, true, true});
+    game_life_surround->addInteraction({false, true, false});
     game_life_model->setSurrounding(game_life_surround);
+
 
     // Rules
     Rule_int* rule1 = new Rule_int(1, 0, 0, 0); // Par défaut, une cellule devient morte
