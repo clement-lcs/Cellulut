@@ -23,7 +23,6 @@ void UIEngine::changeToMainMenuView(){
     this->mainWindow->setCentralWidget(mainMenuView);
 }
 
-
 void UIEngine::changeToSimulationView(){
     SimulationViewV2 *simulationView = new SimulationViewV2(0);
     this->mainWindow->setCentralWidget(simulationView);
