@@ -35,7 +35,8 @@ private:
     QSlider *sliderSize;
 
     void initEvents();
-    void updateInputSizeValue(int newValue);
+    void updateInputSizeValueFromInt(int newValue);
+    void updateInputSizeValueFromString(QString newValue);
 };
 
 #endif // SIMULATIONVIEWV2_H

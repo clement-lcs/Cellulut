@@ -2,20 +2,15 @@
 
 SimulationBoard::SimulationBoard(QWidget *parent) : QFrame(parent)
 {
-    this->boardHeight = MIN_GRID_SIZE;
-    this->boardWidth = MIN_GRID_SIZE;
+    this->boardSize = MIN_GRID_SIZE;
     setFrameStyle(QFrame::Panel|QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
     clearBoard();
 }
 
 void SimulationBoard::changeGridSize(int newValue){
-    if(newValue %2 != 0){
-        this->boardHeight = newValue;
-        this->boardWidth = newValue;
-        update();
-        emit gridSizeChanged(newValue);
-    }
+    this->boardSize = newValue;
+    update();
 }
 
 void SimulationBoard::clearBoard(){
@@ -27,10 +22,10 @@ void SimulationBoard::paintEvent(QPaintEvent *event){
     QPainter painter(this);
     QRect rect=contentsRect();
 
-    int boardTop = rect.bottom() - boardHeight*squareHeight();
+    int boardTop = rect.bottom() - boardSize*squareHeight();
 
-    for(unsigned int i=0; i < boardHeight; ++i){
-        for(unsigned int j = 0; j < boardWidth; ++j){
+    for(int i=0; i < boardSize; ++i){
+        for(int j = 0; j < boardSize; ++j){
             drawSquare(painter, rect.left() + j * squareWidth(),
                        boardTop + i * squareHeight());
         }

@@ -17,8 +17,6 @@ SimulationViewV2::SimulationViewV2(QWidget *parent) : QWidget(parent), board(new
     inputSize->setFixedWidth(30);
     inputSize->setText(QString::number(sliderSize->value()));
 
-
-
     QHBoxLayout *sizeLayout = new QHBoxLayout;
     sizeLayout->addWidget(new QLabel(tr("Size :")));
     sizeLayout->addWidget(inputSize);
@@ -45,8 +43,8 @@ SimulationViewV2::SimulationViewV2(QWidget *parent) : QWidget(parent), board(new
 }
 
 void SimulationViewV2::initEvents(){
-    connect(sliderSize, &QSlider::valueChanged, board , &SimulationBoard::changeGridSize );
-    connect(board, &SimulationBoard::gridSizeChanged, this, &SimulationViewV2::updateInputSizeValue);
+    connect(sliderSize, &QSlider::valueChanged, this , &SimulationViewV2::updateInputSizeValueFromInt );
+    connect(inputSize, &QLineEdit::textEdited, this , &SimulationViewV2::updateInputSizeValueFromString );
 
     qInfo() << "SimulationViewV2::initEvents - events binded";
 }
@@ -58,6 +56,21 @@ QLabel *SimulationViewV2::createLabel(const QString &text)
     return label;
 }
 
-void SimulationViewV2::updateInputSizeValue(int newValue){
+void SimulationViewV2::updateInputSizeValueFromInt(int newValue){
+    if(newValue<MIN_GRID_SIZE || newValue>MAX_GRID_SIZE) return;
+    this->board->changeGridSize(newValue);
     this->inputSize->setText(QString::number(newValue));
+}
+
+void SimulationViewV2::updateInputSizeValueFromString(QString newValueAsStr){
+    if(newValueAsStr == ""){
+        return;
+    }
+    for(char const &c: newValueAsStr.toStdString()){
+        if(isdigit(c)==0) return;
+    }
+    int newValue = newValueAsStr.toInt();
+    if(newValue<MIN_GRID_SIZE || newValue>MAX_GRID_SIZE) return;
+    this->board->changeGridSize(newValue);
+    this->sliderSize->setValue(newValue);
 }

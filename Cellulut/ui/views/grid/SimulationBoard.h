@@ -15,15 +15,12 @@ public:
     SimulationBoard(QWidget *parent = nullptr);
 public slots:
     void changeGridSize(int newValue);
-signals:
-    void gridSizeChanged(int gridSize);
 protected:
     void paintEvent(QPaintEvent *event) override;
 private:
-    int boardWidth;
-    int boardHeight;
-    int squareWidth(){return contentsRect().width() / boardWidth;}
-    int squareHeight(){return contentsRect().height() / boardHeight;}
+    int boardSize;
+    int squareWidth(){return contentsRect().width() / boardSize;}
+    int squareHeight(){return contentsRect().height() / boardSize;}
     void drawSquare(QPainter &painter, int x, int y);
     void clearBoard();
     vector<int> *board = 0;
