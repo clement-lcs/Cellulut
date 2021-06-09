@@ -2,30 +2,42 @@
 #define SIMULATIONVIEW_H
 
 #include <QWidget>
-#include "ui/UIEngine.h"
+#include <QLabel>
+#include <QLCDNumber>
+#include <QPushButton>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QCoreApplication>
+#include <QSlider>
+#include <QLineEdit>
+#include <QSizePolicy>
 #include "ui/views/grid/SimulationBoard.h"
 
-namespace Ui {
-class SimulationView;
-}
-
-class UIEngine;
+QT_BEGIN_NAMESPACE
+class QLCDNumber;
+class QLabel;
+class QPushButton;
+QT_END_NAMESPACE
+class SimulationBoard;
 
 class SimulationView : public QWidget
 {
     Q_OBJECT
-
 public:
-    explicit SimulationView(QWidget *parent = nullptr, UIEngine *uiEngine = 0);
+    SimulationView(QWidget *parent = nullptr);
     ~SimulationView();
-
-private slots:
-    void on_slider_size_valueChanged(int value);
-
 private:
-    Ui::SimulationView *ui;
-    UIEngine *uiEngine;
+    QLabel *createLabel(const QString &text);
+
     SimulationBoard *board;
+    QLabel *displayMessage;
+    QPushButton *startButton;
+    QLineEdit *inputSize;
+    QSlider *sliderSize;
+
+    void initEvents();
+    void updateInputSizeValueFromInt(int newValue);
+    void updateInputSizeValueFromString(QString newValue);
 };
 
 #endif // SIMULATIONVIEW_H
