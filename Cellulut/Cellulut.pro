@@ -2,8 +2,6 @@ QT += widgets
 QT += core gui sql
 
 SOURCES += \
-    data/DataEngine.cpp \
-    data/interfaces/InsideDataForUI.cpp \
     main.cpp \
     models/Automate.cpp \
     models/Cell.cpp \
@@ -18,18 +16,15 @@ SOURCES += \
     models/managers/ModelsManager.cpp \
     models/managers/StatesManager.cpp \
     ui/UIEngine.cpp \
-    ui/interfaces/InsideUIForData.cpp \
-    ui/views/MainMenuView.cpp \
+    ui/UIUtils.cpp \
     ui/views/MainWindow.cpp \
+    ui/views/forms/LoadModelFormView.cpp \
+    ui/views/menu/MainMenuView.cpp \
     ui/views/simulation/SimulationView.cpp \
     ui/views/simulation/SimulationBoard.cpp \
-    ui/views/simulation/StatesDisplay.cpp \
-    ui/views/templates/CreateTemplateView.cpp \
-    ui/views/templates/LoadTemplateView.cpp
+    ui/views/simulation/StatesDisplay.cpp
 
 HEADERS += \
-    data/DataEngine.h \
-    data/interfaces/InsideDataForUI.h \
     main.h \
     models/Automate.h \
     models/Cell.h \
@@ -44,19 +39,14 @@ HEADERS += \
     models/managers/ModelsManager.h \
     models/managers/StatesManager.h \
     ui/UIEngine.h \
-    ui/interfaces/InsideUIForData.h \
-    ui/views/MainMenuView.h \
+    ui/UIUtils.h \
     ui/views/MainWindow.h \
+    ui/views/forms/LoadModelFormView.h \
+    ui/views/menu/MainMenuView.h \
     ui/views/simulation/SimulationView.h \
     ui/views/simulation/SimulationBoard.h \
-    ui/views/simulation/StatesDisplay.h \
-    ui/views/templates/CreateTemplateView.h \
-    ui/views/templates/LoadTemplateView.h
+    ui/views/simulation/StatesDisplay.h
 
-FORMS += \
-    ui/views/MainMenuView.ui \
-    ui/views/MainWindow.ui \
-    ui/views/templates/CreateTemplateView.ui \
-    ui/views/templates/LoadTemplateView.ui
+FORMS +=
 
 

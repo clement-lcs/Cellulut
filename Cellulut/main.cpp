@@ -1,7 +1,4 @@
 #include "main.h"
-
-#include <QApplication>
-#include "data/DataEngine.h"
 #include "ui/UIEngine.h"
 #include "models/Library.h"
 #include "models/Automate.h"
@@ -10,12 +7,14 @@
 void ajout_donnee()
 {
     // Ajout du modèle Life Game
-    Model* game_life_model = new Model(1,"Jeu de la vie");
+    Model* game_life_model = new Model(1,"Jeu de la vie","Toi même tu sais","Clément LUCAS","22/06/2000");
 
     // States
-    State* vivant = new State(1, "1","noir");
+    State* vivant = new State(0, "Vivant","#FFFFFF");
     game_life_model->add_State(vivant);
-    game_life_model->getListStates()->at(0)->setLabel("0");
+
+    State* mort = new State(1, "Mort","#000000");
+    game_life_model->add_State(mort);
 
     // Surrounding
     Surrounding* game_life_surround = new Surrounding("Jeu de la vie");
@@ -41,14 +40,10 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    DataEngine *dataEngine = new DataEngine();
+    ajout_donnee();
+
     UIEngine *uiEngine = new UIEngine(&app);
-
-    uiEngine->setInsideDataForUI(dataEngine->getInsideDataForUI());
-    dataEngine->setInsideUIForData(uiEngine->getInsideUIForData());
-
     uiEngine->start();
-    uiEngine->changeToSimulationView();
 
     return app.exec();
 

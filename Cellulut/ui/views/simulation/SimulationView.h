@@ -1,19 +1,11 @@
 #ifndef SIMULATIONVIEW_H
 #define SIMULATIONVIEW_H
 
-#include <QWidget>
-#include <QLabel>
-#include <QLCDNumber>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QHBoxLayout>
-#include <QCoreApplication>
-#include <QSlider>
-#include <QLineEdit>
-#include <QSizePolicy>
 #include "models/Model.h"
+#include "models/Automate.h"
 #include "SimulationBoard.h"
 #include "StatesDisplay.h"
+#include "ui/UIEngine.h"
 
 QT_BEGIN_NAMESPACE
 class QLCDNumber;
@@ -26,9 +18,10 @@ class SimulationView : public QWidget
 {
     Q_OBJECT
 public:
-    SimulationView(QWidget *parent = nullptr);
+    SimulationView(QWidget *parent = nullptr, UIEngine *uiEngine = nullptr);
     ~SimulationView();
 private:
+    UIEngine *uiEngine;
     SimulationBoard *board;
     Model *modelForSimulation;
 

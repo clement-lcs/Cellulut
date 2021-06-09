@@ -4,11 +4,6 @@
 #include "main.h"
 #include "models/Cell.h"
 #include "models/State.h"
-#include <QObject>
-#include <QFrame>
-#include <QPaintEvent>
-#include <QPainter>
-#include <QRgb>
 
 class SimulationBoard : public QFrame
 {

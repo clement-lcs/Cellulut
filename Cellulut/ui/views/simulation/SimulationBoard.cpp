@@ -2,36 +2,25 @@
 
 SimulationBoard::SimulationBoard(QWidget *parent, vector<State*> *_listOfStates) : QFrame(parent), listOfStates(_listOfStates)
 {
-    qInfo() << "SimulationBoard::SimulationBoard - constructor";
     this->gridSize = MIN_GRID_SIZE;
-
-    qInfo() << _listOfStates->size();
-
-    /*this->listOfStates = new vector<State*>();
-    this->listOfStates->push_back(new State(0, "VIVANT","#FFFFFF"));
-    this->listOfStates->push_back(new State(1, "MORT","#000000"));
-    this->listOfStates->push_back(new State(2, "EN PHASE DE DECES","#FF0000"));
-    this->listOfStates->push_back(new State(3, "EN PHASE DE NAISSANCE","#00FF00"));*/
-
     this->board = new map<string,Cell*>();
-
     setFrameStyle(QFrame::Panel|QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
     setSizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
     setFixedHeight(400);
     setFixedWidth(400);
     isInConfigurationMode=true;
-
     clearBoard();
+
+    qInfo() << "SimulationBoard::SimulationBoard - constructor";
 }
 
 SimulationBoard::~SimulationBoard()
 {
-    qInfo() << "SimulationBoard::SimulationBoard - destructor BEGIN";
+    for (map<string, Cell*>::iterator it = this->board->begin(); it != this->board->end(); ++it)
+       delete it->second;
 
-    delete [] this->board;
-
-    qInfo() << "SimulationBoard::~SimulationBoard - destructor END";
+    qInfo() << "SimulationBoard::~SimulationBoard - destructor";
 }
 
 
@@ -42,7 +31,6 @@ void SimulationBoard::changeGridSize(int newValue){
 }
 
 void SimulationBoard::clearBoard(){
-    qInfo() << "SimulationBoard::clearBoard - BEGIN";
     map<string,Cell*>::iterator it;
     for(map<std::string, Cell*>::iterator itr = this->board->begin(); itr != this->board->end(); itr++)
     {
