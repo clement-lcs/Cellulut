@@ -18,7 +18,7 @@ void ajout_donnee()
     game_life_model->getListStates()->at(0)->setLabel("0");
 
     // Surrounding
-    Surrounding* game_life_surround = new Surrounding("Jeu de la vie");
+    Surrounding* game_life_surround = new Surrounding(0,"Jeu de la vie");
     game_life_surround->addInteraction({false, true, false});
     game_life_surround->addInteraction({true, true, true});
     game_life_surround->addInteraction({false, true, false});
@@ -39,7 +39,7 @@ void ajout_donnee()
 }
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    /*QApplication app(argc, argv);
 
     DataEngine *dataEngine = new DataEngine();
     UIEngine *uiEngine = new UIEngine(&app);
@@ -50,25 +50,25 @@ int main(int argc, char *argv[])
     uiEngine->start();
     uiEngine->changeToSimulationView();
 
-    return app.exec();
+    return app.exec();*/
 
-    /*ajout_donnee();
+    ajout_donnee();
     Automate::getAutomate()->setModel(Library::getLibrary()->getListModels()->at(0));
-    // J'affiche un surround (en croix)
-    Automate::getAutomate()->getModel()->getSurrounding()->afficher_surround();
     Automate::getAutomate()->init_Grid(5,5);
-    // Après le init_Grid tout devient False
-    Automate::getAutomate()->getModel()->getSurrounding()->afficher_surround();
     Automate::getAutomate()->manual_init();
-    Automate::getAutomate()->afficher_grid();
-    cout<<endl;
-    Automate::getAutomate()->next_generation();
-    Automate::getAutomate()->afficher_grid();
-    cout<<endl;
-    Automate::getAutomate()->next_generation();
-    Automate::getAutomate()->afficher_grid();
-    cout<<endl;
-    Automate::getAutomate()->getModel()->getSurrounding()->afficher_surround();
 
-    return 0;*/
+    Automate::getAutomate()->afficher_grid();
+    cout<<endl;
+    Automate::getAutomate()->next_generation();
+    Automate::getAutomate()->afficher_grid();
+    cout<<endl;
+    Automate::getAutomate()->next_generation();
+    Automate::getAutomate()->afficher_grid();
+    cout<<endl;
+    cout<<"Historic :"<<endl;
+    Automate::getAutomate()->afficher_historique(0);
+    Automate::getAutomate()->afficher_historique(1);
+    Automate::getAutomate()->afficher_historique(2);
+
+    return 0;
 }
