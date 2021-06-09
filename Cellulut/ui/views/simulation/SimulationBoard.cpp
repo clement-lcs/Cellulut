@@ -15,6 +15,9 @@ SimulationBoard::SimulationBoard(QWidget *parent) : QFrame(parent)
 
     setFrameStyle(QFrame::Panel|QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
+    setSizePolicy(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+    setFixedHeight(400);
+    setFixedWidth(400);
     isInConfigurationMode=true;
 
     clearBoard();

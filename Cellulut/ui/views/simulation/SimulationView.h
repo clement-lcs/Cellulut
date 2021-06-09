@@ -11,7 +11,9 @@
 #include <QSlider>
 #include <QLineEdit>
 #include <QSizePolicy>
-#include "ui/views/grid/SimulationBoard.h"
+#include "models/Model.h"
+#include "SimulationBoard.h"
+#include "StatesDisplay.h"
 
 QT_BEGIN_NAMESPACE
 class QLCDNumber;
@@ -27,17 +29,32 @@ public:
     SimulationView(QWidget *parent = nullptr);
     ~SimulationView();
 private:
-    QLabel *createLabel(const QString &text);
-
     SimulationBoard *board;
-    QLabel *displayMessage;
+    Model *modelForSimulation;
+
+    QLabel *modelTitle;
+    QLabel *modelDescription;
+    QLabel *modelAuthor;
+    QLabel *modelDate;
+
     QPushButton *startButton;
     QLineEdit *inputSize;
     QSlider *sliderSize;
+    QWidget *sizeDisplay;
+    StatesDisplay *statesDisplay;
 
+    QGridLayout *gridLayout;
+
+    QLabel *createLabel(const QString &text, const QString &objectName, int fontSize, bool isBold, bool isItalic);
+
+    void setupGridLayout();
+    void setupLabelsForModel();
     void initEvents();
     void updateInputSizeValueFromInt(int newValue);
     void updateInputSizeValueFromString(QString newValue);
+
+    const char *styleSheet =
+            "";
 };
 
 #endif // SIMULATIONVIEW_H
