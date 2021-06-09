@@ -4,9 +4,8 @@
 Model::Model(unsigned int _id, string _title, string _description, string _author, string _date) : id(_id), title(_title), description(_description), author(_author), date_creation(_date)
 {
     this->listStates = new vector<State*>;
-    State* default_state = new State(0,"default","grey");
-    this->add_State(default_state);
-
+    //State* default_state = new State(0,"default","grey");
+    //this->add_State(default_state);
     this->surrounding = nullptr;
     this->rule_int = new vector<Rule_int*>;
     this->rule_ext = new vector<Rule_ext*>;

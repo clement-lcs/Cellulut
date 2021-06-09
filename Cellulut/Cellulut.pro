@@ -21,9 +21,9 @@ SOURCES += \
     ui/interfaces/InsideUIForData.cpp \
     ui/views/MainMenuView.cpp \
     ui/views/MainWindow.cpp \
-    ui/views/SimulationView.cpp \
-    ui/views/SimulationViewV2.cpp \
-    ui/views/grid/SimulationBoard.cpp \
+    ui/views/simulation/SimulationView.cpp \
+    ui/views/simulation/SimulationBoard.cpp \
+    ui/views/simulation/StatesDisplay.cpp \
     ui/views/templates/CreateTemplateView.cpp \
     ui/views/templates/LoadTemplateView.cpp
 
@@ -47,16 +47,15 @@ HEADERS += \
     ui/interfaces/InsideUIForData.h \
     ui/views/MainMenuView.h \
     ui/views/MainWindow.h \
-    ui/views/SimulationView.h \
-    ui/views/SimulationViewV2.h \
-    ui/views/grid/SimulationBoard.h \
+    ui/views/simulation/SimulationView.h \
+    ui/views/simulation/SimulationBoard.h \
+    ui/views/simulation/StatesDisplay.h \
     ui/views/templates/CreateTemplateView.h \
     ui/views/templates/LoadTemplateView.h
 
 FORMS += \
     ui/views/MainMenuView.ui \
     ui/views/MainWindow.ui \
-    ui/views/SimulationView.ui \
     ui/views/templates/CreateTemplateView.ui \
     ui/views/templates/LoadTemplateView.ui
 

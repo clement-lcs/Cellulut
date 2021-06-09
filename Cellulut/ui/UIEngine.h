@@ -7,8 +7,8 @@
 #include "ui/interfaces/InsideUIForData.h"
 #include "views/MainWindow.h"
 #include "views/MainMenuView.h"
-#include "views/SimulationView.h"
-#include "views/SimulationViewV2.h"
+#include "views/simulation/SimulationView.h"
+#include "views/simulation/SimulationView.h"
 #include "views/templates/CreateTemplateView.h"
 #include "views/templates/LoadTemplateView.h"
 
@@ -19,11 +19,11 @@ class MainWindow;
 class UIEngine
 {
 private:
-    static const int width  = 800;
+    static const int width = 800;
     static const int height = 600;
 
-    InsideDataForUI* insideDataForUI;
-    InsideUIForData* insideUIForData;
+    InsideDataForUI *insideDataForUI;
+    InsideUIForData *insideUIForData;
 
     QApplication *qapp;
 
@@ -32,10 +32,10 @@ private:
 public:
     UIEngine(QApplication *app);
 
-    InsideDataForUI* getInsideDataForUI()const{return this->insideDataForUI;}
-    void setInsideDataForUI(InsideDataForUI *_insideDataForUI){this->insideDataForUI=_insideDataForUI;}
-    InsideUIForData* getInsideUIForData()const{return this->insideUIForData;}
-    void setInsideUIForData(InsideUIForData *_insideUIForData){this->insideUIForData=_insideUIForData;}
+    InsideDataForUI *getInsideDataForUI() const { return this->insideDataForUI; }
+    void setInsideDataForUI(InsideDataForUI *_insideDataForUI) { this->insideDataForUI = _insideDataForUI; }
+    InsideUIForData *getInsideUIForData() const { return this->insideUIForData; }
+    void setInsideUIForData(InsideUIForData *_insideUIForData) { this->insideUIForData = _insideUIForData; }
 
     void start();
     void initMainWindow();
