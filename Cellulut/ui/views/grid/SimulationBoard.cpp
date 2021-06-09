@@ -4,16 +4,19 @@ SimulationBoard::SimulationBoard(QWidget *parent) : QFrame(parent)
 {
     qInfo() << "SimulationBoard::SimulationBoard - constructor";
     this->gridSize = MIN_GRID_SIZE;
-    this->board = new map<string,Cell*>();
+
     this->listOfStates = new vector<State*>();
     this->listOfStates->push_back(new State(0, "VIVANT","#FFFFFF"));
     this->listOfStates->push_back(new State(1, "MORT","#000000"));
     this->listOfStates->push_back(new State(2, "EN PHASE DE DECES","#FF0000"));
     this->listOfStates->push_back(new State(3, "EN PHASE DE NAISSANCE","#00FF00"));
 
+    this->board = new map<string,Cell*>();
+
     setFrameStyle(QFrame::Panel|QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
     isInConfigurationMode=true;
+
     clearBoard();
 }
 
@@ -28,13 +31,20 @@ SimulationBoard::~SimulationBoard()
 
 
 void SimulationBoard::changeGridSize(int newValue){
-    clearBoard();
     this->gridSize = newValue;
+    clearBoard();
     update();
 }
 
 void SimulationBoard::clearBoard(){
-    for (int i = 0; i < gridSize * gridSize; ++i) {
+    map<string,Cell*>::iterator it;
+    for(map<std::string, Cell*>::iterator itr = this->board->begin(); itr != this->board->end(); itr++)
+    {
+        delete (itr->second);
+    }
+    this->board->clear();
+    int i;
+    for(i =0; i < this->gridSize * this->gridSize; i++){
         Cell *cell = new Cell(i%gridSize,i/gridSize);
         cell->setState(this->listOfStates->at(0));
         this->board->insert({cell->getHash(), cell});
@@ -51,7 +61,7 @@ void SimulationBoard::paintEvent(QPaintEvent *event){
     for(unsigned int i=0; i < this->board->size(); i++){
         int cellX = i%gridSize;
         int cellY = i/gridSize;
-        Cell *cell = this->board->at(to_string(cellX)+to_string(cellY));
+        Cell *cell = this->board->at(Cell::getHashFromPos(cellX, cellY));
         QString color = QString::fromStdString(cell->getState()->getColor());
         drawSquare(painter, rect.left() + cellX * squareSize(),
                    boardTop + cellY * squareSize(), color);
@@ -60,35 +70,35 @@ void SimulationBoard::paintEvent(QPaintEvent *event){
 
 void SimulationBoard::mousePressEvent(QMouseEvent *event){
 
-   if(!isInConfigurationMode){
-       qInfo() << "SimulationBoard::mousePressEvent - not in configuration mode, ignore click event";
-       return;
-   }
+    if(!isInConfigurationMode){
+        qInfo() << "SimulationBoard::mousePressEvent - not in configuration mode, ignore click event";
+        return;
+    }
 
-   int clickPosX = event->pos().x();
-   int clickPosY = event->pos().y();
+    int clickPosX = event->pos().x();
+    int clickPosY = event->pos().y();
 
-   // Check if click is not outside the grid
-   int gridMaxXorY = this->squareSize()*this->gridSize;
-   int gridMinY = contentsRect().bottom() - gridSize*squareSize();
+    // Check if click is not outside the grid
+    int gridMaxXorY = this->squareSize()*this->gridSize;
+    int gridMinY = contentsRect().bottom() - gridSize*squareSize();
 
-   if(clickPosX > gridMaxXorY || clickPosY > gridMinY+gridMaxXorY || clickPosY < gridMinY){
-       qInfo() << "SimulationBoard::mousePressEvent - click outside of the grid, ignore click event";
-       return;
-   }
+    if(clickPosX > gridMaxXorY || clickPosY > gridMinY+gridMaxXorY || clickPosY < gridMinY){
+        qInfo() << "SimulationBoard::mousePressEvent - click outside of the grid, ignore click event";
+        return;
+    }
 
-   // Get clicked cell hash
-   int cellX = clickPosX / this->squareSize();
-   int cellY= clickPosY / this->squareSize();
-   string cellHash = to_string(cellX) + to_string(cellY);
+    // Get clicked cell hash
+    int cellX = clickPosX / this->squareSize();
+    int cellY= (clickPosY-gridMinY) / this->squareSize();
+    string cellHash = Cell::getHashFromPos(cellX, cellY);
 
-   // Change cell state
-   Cell *cell = this->board->at(cellHash);
-   State *state = cell->getState();
-   int stateIndex = state->getIndex();
-   int nextStateIndex = stateIndex + 1 < listOfStates->size() ? stateIndex+1 : 0;
-   cell->setState(this->listOfStates->at(nextStateIndex));
-   update();
+    // Change cell state
+    Cell *cell = this->board->at(cellHash);
+    State *state = cell->getState();
+    int stateIndex = state->getIndex();
+    int nextStateIndex = stateIndex + 1 < listOfStates->size() ? stateIndex+1 : 0;
+    cell->setState(this->listOfStates->at(nextStateIndex));
+    update();
 }
 
 void SimulationBoard::drawSquare(QPainter &painter, int x, int y, QString colorAsString){
