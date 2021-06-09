@@ -8,7 +8,7 @@ ModelsManager::ModelsManager(DatabaseManager *databaseManager) : databaseManager
     qInfo() <<  "ModelsManager::ModelsManager - constructor OK";
 }
 
-vector<Model*>* ModelsManager::findAllModels()
+/*vector<Model*>* ModelsManager::findAllModels()
 {
     qInfo() <<  "ModelsManager::findAllModels()";
 
@@ -35,4 +35,4 @@ vector<Model*>* ModelsManager::findAllModels()
     }
 
     return result;
-}
+}*/

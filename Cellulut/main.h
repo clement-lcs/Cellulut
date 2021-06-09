@@ -16,6 +16,4 @@ using namespace std;
 #include <cstdlib>
 #include <QDebug>
 
-void ajout_donnee();
-
 #endif // MAIN

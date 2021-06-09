@@ -15,13 +15,13 @@ Cellulut::~Cellulut()
     delete this->modelsManager;
 }
 
-void Cellulut::init(){
+/*void Cellulut::init(){
     qInfo() << "Cellulut::init()";
 
     this->initListOfModels();
-}
+}*/
 
-void Cellulut::initListOfModels(){
+/*void Cellulut::initListOfModels(){
     qInfo() << "Cellulut::init()";
 
     this->listOfModels = this->modelsManager->findAllModels();
@@ -30,4 +30,4 @@ void Cellulut::initListOfModels(){
         vector<State*> *listOfStates = this->statesManager->findAllStatesByModelID(model->getId_Model());
         model->setListStates(listOfStates);
     }
-}
+}*/

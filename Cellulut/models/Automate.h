@@ -9,8 +9,8 @@ class Automate // Singleton
 {
     protected :
         static Automate* singleton; // Pointer to singleton
-        Automate() = default; // Private constructor
-        Model* model = nullptr;
+        Automate(); // Private constructor
+        Model* model = nullptr; //current_model
         vector<unsigned int**>* historic = new vector<unsigned int**>;
     public :
         static Automate* getAutomate() noexcept {return singleton;}

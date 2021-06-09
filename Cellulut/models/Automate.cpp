@@ -5,6 +5,56 @@
 
 Automate* Automate::singleton = new Automate;
 
+Automate::Automate()
+{
+// Adding surroundings
+    // von Neumann
+    Library::getLibrary()->create_Surrounding("von Neumann");
+    Library::getLibrary()->getListSurroundings()->at(0)->addInteraction({false, true, false});
+    Library::getLibrary()->getListSurroundings()->at(0)->addInteraction({true, true, true});
+    Library::getLibrary()->getListSurroundings()->at(0)->addInteraction({false, true, false});
+
+    // Moore
+    Library::getLibrary()->create_Surrounding("Moore");
+    Library::getLibrary()->getListSurroundings()->at(1)->addInteraction({true, true, true});
+    Library::getLibrary()->getListSurroundings()->at(1)->addInteraction({true, true, true});
+    Library::getLibrary()->getListSurroundings()->at(1)->addInteraction({true, true, true});
+
+// Adding models
+    // Life Game
+    Library::getLibrary()->create_Model("Life Game");
+    State* dead = new State(0, "dead","white");
+    State* alive = new State(1, "alive","black");
+    Library::getLibrary()->getListModels()->at(0)->add_State(dead); // State dead added
+    Library::getLibrary()->getListModels()->at(0)->add_State(alive); // State alive added
+    Library::getLibrary()->getListModels()->at(0)->setSurrounding(Library::getLibrary()->getListSurroundings()->at(1)); // Surrounding set on Moore
+    Rule_int* life_game_rule_1 = new Rule_int(1, 0, 0, 0); // Par défaut, une cellule devient morte
+    Rule_int* life_game_rule_2 = new Rule_int(0, 3, 1, 1); // Une cellule morte avec 3 voisins vivants devient vivante
+    Rule_int* life_game_rule_3 = new Rule_int(1, 2, 1, 1); // Une cellule vivante avec 2 voisins vivants devient vivante
+    Rule_int* life_game_rule_4 = new Rule_int(1, 3, 1, 1); // Une cellule vivante avec 3 voisins vivants devient vivante
+    Library::getLibrary()->getListModels()->at(0)->add_Rule_int(life_game_rule_1);
+    Library::getLibrary()->getListModels()->at(0)->add_Rule_int(life_game_rule_2);
+    Library::getLibrary()->getListModels()->at(0)->add_Rule_int(life_game_rule_3);
+    Library::getLibrary()->getListModels()->at(0)->add_Rule_int(life_game_rule_4);
+
+    // Brian's brain
+    Library::getLibrary()->create_Model("Brian's brain");
+    State* off = new State(0, "off","green");
+    State* firing = new State(1, "firing","red");
+    State* refractory = new State(2, "refractory","yellow");
+    Library::getLibrary()->getListModels()->at(1)->add_State(off); // State off added
+    Library::getLibrary()->getListModels()->at(1)->add_State(firing); // State firing added
+    Library::getLibrary()->getListModels()->at(1)->add_State(refractory); // State refractory added
+    Library::getLibrary()->getListModels()->at(1)->setSurrounding(Library::getLibrary()->getListSurroundings()->at(1)); // Surrounding set on Moore
+    Rule_int* brians_brain_rule_1 = new Rule_int(1, 0, 0, 2); // Une cellule excitée devient réfractaire
+    Rule_int* brians_brain_rule_2 = new Rule_int(2, 0, 0, 0); // Une cellule réfractaire devient au repos
+    Rule_int* brians_brain_rule_3 = new Rule_int(0, 2, 1, 1); // Une cellule au repos avec 2 voisins excités devient excitée
+    Library::getLibrary()->getListModels()->at(1)->add_Rule_int(brians_brain_rule_1);
+    Library::getLibrary()->getListModels()->at(1)->add_Rule_int(brians_brain_rule_2);
+    Library::getLibrary()->getListModels()->at(1)->add_Rule_int(brians_brain_rule_3);
+}
+
+
 Model* Automate::getModel() const{return this->model;}
 
 vector<unsigned int**>* Automate::getHistoric() const{return this->historic;}
@@ -198,7 +248,7 @@ void Automate::afficher_grid()
     cout<<"Affichage grid :"<<endl;
     for (unsigned int i=0; i < Grid::getGrid()->getRows(); i++){
         for (unsigned int j=0; j < Grid::getGrid()->getColumns(); j++)
-            cout<<Grid::getGrid()->getlistCells()[i][j].getState()->getLabel()<<" ";
+            cout<<Grid::getGrid()->getlistCells()[i][j].getState()->getIndex()<<" ";
         cout<<"\n";
     }
 }

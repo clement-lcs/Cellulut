@@ -18,10 +18,10 @@ class Model
         Surrounding* surrounding;
         vector<Rule_int*>* rule_int;
         vector<Rule_ext*>* rule_ext;
-    public :
-        Model(unsigned int _id_model = 0, string _title = "", string _description = "", string _author = "", string _date ="");
-        ~Model() = default;
+        Model(unsigned int _id, string _title, string _description, string _author, string _date);
 
+    public :
+        ~Model() = default;
         unsigned int getId_Model() const;
         string getTitle() const;
         string getDescription() const;
@@ -48,6 +48,8 @@ class Model
         void add_Rule_int(Rule_int* new_rule_int);
 
         QString getTitleAsQString() const{return QString::fromUtf8(this->title.c_str());}
+
+        friend class Library;
 };
 
 
