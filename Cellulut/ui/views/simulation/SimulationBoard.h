@@ -14,7 +14,7 @@ class SimulationBoard : public QFrame
 {
     Q_OBJECT;
 public:
-    SimulationBoard(QWidget *parent = nullptr);
+    SimulationBoard(QWidget *parent = nullptr, vector<State*> *listOfStates = nullptr);
     ~SimulationBoard();
 public slots:
     void changeGridSize(int newValue);

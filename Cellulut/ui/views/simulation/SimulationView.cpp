@@ -1,10 +1,12 @@
 #include "SimulationView.h"
 
-SimulationView::SimulationView(QWidget *parent) : QWidget(parent), board(new SimulationBoard)
+SimulationView::SimulationView(QWidget *parent) : QWidget(parent)
 {
     this->modelForSimulation = new Model(1, "Jeu de la vie", "Le plus connu des automates cellulaires", "John Horton Conway", "1970");
     this->modelForSimulation->add_State(new State(0,"Vivant","#FFFFFF"));
     this->modelForSimulation->add_State(new State(1,"Mort","#000000"));
+    this->modelForSimulation->add_State(new State(2,"On sait pas","#FF0000"));
+    this->board = new SimulationBoard(0, this->modelForSimulation->getListStates());
 
     this->startButton = new QPushButton(tr("&Start"));
     this->startButton->setFocusPolicy(Qt::NoFocus);

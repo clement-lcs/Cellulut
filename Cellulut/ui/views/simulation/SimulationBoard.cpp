@@ -1,15 +1,17 @@
 #include "SimulationBoard.h"
 
-SimulationBoard::SimulationBoard(QWidget *parent) : QFrame(parent)
+SimulationBoard::SimulationBoard(QWidget *parent, vector<State*> *_listOfStates) : QFrame(parent), listOfStates(_listOfStates)
 {
     qInfo() << "SimulationBoard::SimulationBoard - constructor";
     this->gridSize = MIN_GRID_SIZE;
 
-    this->listOfStates = new vector<State*>();
+    qInfo() << _listOfStates->size();
+
+    /*this->listOfStates = new vector<State*>();
     this->listOfStates->push_back(new State(0, "VIVANT","#FFFFFF"));
     this->listOfStates->push_back(new State(1, "MORT","#000000"));
     this->listOfStates->push_back(new State(2, "EN PHASE DE DECES","#FF0000"));
-    this->listOfStates->push_back(new State(3, "EN PHASE DE NAISSANCE","#00FF00"));
+    this->listOfStates->push_back(new State(3, "EN PHASE DE NAISSANCE","#00FF00"));*/
 
     this->board = new map<string,Cell*>();
 
@@ -40,6 +42,7 @@ void SimulationBoard::changeGridSize(int newValue){
 }
 
 void SimulationBoard::clearBoard(){
+    qInfo() << "SimulationBoard::clearBoard - BEGIN";
     map<string,Cell*>::iterator it;
     for(map<std::string, Cell*>::iterator itr = this->board->begin(); itr != this->board->end(); itr++)
     {
