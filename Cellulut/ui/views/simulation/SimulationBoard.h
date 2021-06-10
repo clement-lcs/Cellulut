@@ -4,25 +4,26 @@
 #include "main.h"
 #include "models/Cell.h"
 #include "models/State.h"
+#include "models/Grid.h"
+#include "models/Automate.h"
 
 class SimulationBoard : public QFrame
 {
     Q_OBJECT;
 public:
-    SimulationBoard(QWidget *parent = nullptr, vector<State*> *listOfStates = nullptr);
+    SimulationBoard(QWidget *parent = nullptr);
     ~SimulationBoard();
 public slots:
-    void changeGridSize(int newValue);
+    void gridSizeChanged();
 protected:
     void paintEvent(QPaintEvent *pe) override;
     void mousePressEvent(QMouseEvent *event) override;
+signals:
+    void initialConfigurationChanged();
 private:
-    int gridSize;
     bool isInConfigurationMode;
-    int squareSize(){return contentsRect().width() / gridSize;}
+    int squareSize(){return contentsRect().width() / Grid::getGrid()->getSize();}
     void drawSquare(QPainter &painter, int x, int y, QString colorAsString);
     void clearBoard();
-    map<string, Cell*> *board = 0;
-    vector<State*> *listOfStates = 0;
 };
 #endif // SIMULATIONBOARD_H

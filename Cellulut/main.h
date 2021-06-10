@@ -41,6 +41,7 @@ using namespace std;
 #include <QStringListModel>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QToolButton>
 
 #include "ui/UIUtils.h"
 

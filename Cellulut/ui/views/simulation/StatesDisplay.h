@@ -3,6 +3,7 @@
 
 #include "main.h"
 #include "models/State.h"
+#include "models/Automate.h"
 #include <QWidget>
 #include <QLabel>
 #include <QGridLayout>
@@ -12,8 +13,10 @@ class StatesDisplay : public QWidget
 {
     Q_OBJECT
 public:
-    StatesDisplay(QWidget *parent = nullptr, vector<State*> *listOfStates= nullptr);
+    StatesDisplay(QWidget *parent = nullptr);
     ~StatesDisplay();
+public slots:
+    void refreshCounters();
 private:
     QGridLayout *layout;
 

@@ -1,15 +1,19 @@
 #include "StatesDisplay.h"
 
-StatesDisplay::StatesDisplay(QWidget *parent, vector<State*> *listOfStates) :QWidget(parent)
+StatesDisplay::StatesDisplay(QWidget *parent) :QWidget(parent)
 {
+    vector<State*>* listOfStates = Automate::getAutomate()->getModel()->getListStates();
+
     this->mapOfColors = new map<int,QWidget*>();
     this->mapOfLabels = new map<int,QLabel*>();
     this->mapOfCounts = new map<int,QLCDNumber*>();
-
+    map<int,int> mapNbCellsPerState = Grid::getGrid()->countNbCellsPerState();
     this->layout = new QGridLayout;
 
     for(unsigned int i =0; i < listOfStates->size(); i++){
         State *state = listOfStates->at(i);
+
+        int nbCells = mapNbCellsPerState.count(state->getIndex()) == 0 ? 0 : mapNbCellsPerState.at(state->getIndex());
 
         // State Color
         QString stateColor(tr(state->getColor().c_str()));
@@ -28,6 +32,7 @@ StatesDisplay::StatesDisplay(QWidget *parent, vector<State*> *listOfStates) :QWi
 
         // State count
         QLCDNumber *stateCount = new QLCDNumber(3);
+        stateCount->display(QString::number(nbCells));
         stateCount->setSegmentStyle(QLCDNumber::Filled);
         this->mapOfCounts->insert({i,stateCount});
         this->layout->addWidget(stateCount,i,2);
@@ -38,4 +43,14 @@ StatesDisplay::StatesDisplay(QWidget *parent, vector<State*> *listOfStates) :QWi
 StatesDisplay::~StatesDisplay()
 {
     delete this->layout;
+}
+
+void StatesDisplay::refreshCounters(){
+    map<int,int> mapNbCellsPerState = Grid::getGrid()->countNbCellsPerState();
+    for(map<int, QLCDNumber*>::iterator itr = this->mapOfCounts->begin(); itr != this->mapOfCounts->end(); itr++)
+    {
+        int stateIndex = itr->first;
+        int nbOfStates = mapNbCellsPerState.count(stateIndex) == 0 ? 0 : mapNbCellsPerState.at(stateIndex);
+        itr->second->display(QString::number(nbOfStates));
+    }
 }

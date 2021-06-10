@@ -5,6 +5,7 @@
 #include "models/Automate.h"
 #include "SimulationBoard.h"
 #include "StatesDisplay.h"
+#include "SimulationButtonsBar.h"
 #include "ui/UIEngine.h"
 
 QT_BEGIN_NAMESPACE
@@ -30,13 +31,14 @@ private:
     QLabel *modelAuthor;
     QLabel *modelDate;
 
-    QPushButton *startButton;
     QLineEdit *inputSize;
     QSlider *sliderSize;
     QWidget *sizeDisplay;
     StatesDisplay *statesDisplay;
+    SimulationButtonsBar *simulationButtonsBar;
 
     QGridLayout *gridLayout;
+    QHBoxLayout *simulationButtonsLayout;
 
     QLabel *createLabel(const QString &text, const QString &objectName, int fontSize, bool isBold, bool isItalic);
 
@@ -45,6 +47,8 @@ private:
     void initEvents();
     void updateInputSizeValueFromInt(int newValue);
     void updateInputSizeValueFromString(QString newValue);
+    void onClickStepForward();
+    void changeGridSize(int newValue);
 
     const char *styleSheet =
             "";

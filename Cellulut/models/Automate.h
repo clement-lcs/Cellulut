@@ -16,11 +16,12 @@ class Automate // Singleton
         static Automate* getAutomate() noexcept {return singleton;}
         ~Automate() = default;
 
-        Model* getModel() const;
+        Model* getModel() const {return this->model;}
+        void setModel(Model* _model) {this->model = _model;}
 
-        void setModel(Model* _model);
+        void init_Grid(int size);
 
-        void init_Grid(unsigned int rows, unsigned int columns);
+        void clear_grid();
 
         State* random_state();
 

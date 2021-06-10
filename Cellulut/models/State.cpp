@@ -3,7 +3,6 @@
 
 State::State(unsigned int _index, string _label, string _color): index(_index), label(_label), color(_color){}
 
-
 unsigned int State::getIndex() const{return this->index;}
 
 string State::getColor() const{return this->color;}

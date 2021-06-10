@@ -55,6 +55,7 @@ LoadModelFormView::~LoadModelFormView()
 void LoadModelFormView::onNextButtonClick(){
     int selectedModel = this->modelCombo->currentIndex();
     Automate::getAutomate()->setModel(Library::getLibrary()->getListModels()->at(selectedModel));
+    Automate::getAutomate()->init_Grid(MIN_GRID_SIZE);
     this->uiEngine->changeToSimulationView();
 }
 

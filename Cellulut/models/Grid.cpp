@@ -3,15 +3,35 @@
 
 Grid* Grid::singleton = new Grid;
 
-unsigned int Grid::getRows() const{return this->rows;}
+Grid::Grid(){
+    this->mapCells = new map<string,Cell*>();
 
-unsigned int Grid::getColumns() const{return this->columns;}
+    qInfo() << "Grid::Grid - constructor";
+}
 
-Cell** Grid::getlistCells() const{return listCells;}
+void Grid::removeAllCells(){
+    map<string,Cell*>::iterator it;
+    for(map<std::string, Cell*>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)
+    {
+        delete (itr->second);
+    }
+    this->mapCells->clear();
+}
 
-
-void Grid::setRows(unsigned int _rows){this->rows = _rows;}
-
-void Grid::setColumns(unsigned int _columns){this->columns = _columns;}
-
-void Grid::setlistCells(Cell** _listCells) {listCells = _listCells;}
+map<int,int> Grid::countNbCellsPerState(){
+    map<int,int> nbCellsPerState;
+    for(map<std::string, Cell*>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)
+    {
+        Cell *cell = itr->second;
+        int stateIndex = cell->getState()->getIndex();
+        int nbStates;
+        if(nbCellsPerState.count(stateIndex) == 0){
+            nbStates = 1;
+        } else {
+            nbStates = nbCellsPerState.at(stateIndex);
+            nbStates++;
+        }
+        nbCellsPerState.insert({stateIndex,nbStates});
+    }
+    return nbCellsPerState;
+}

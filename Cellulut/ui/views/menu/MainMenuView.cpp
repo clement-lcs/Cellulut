@@ -6,9 +6,11 @@ MainMenuView::MainMenuView(QWidget *_parent, UIEngine *_uiEngine) : QWidget(_par
     this->createModelButton = new QPushButton("Créer un modèle");
     this->createModelButton->setFixedHeight(150);
     this->createModelButton->setFont(UIUtils::getFont(12,true,false,QFont::Capitalization::AllUppercase));
+    this->createModelButton->setDisabled(true);
     this->loadModelButton = new QPushButton("Charger un modèle");
     this->loadModelButton->setFixedHeight(150);
     this->loadModelButton->setFont(UIUtils::getFont(12,true,false,QFont::Capitalization::AllUppercase));
+
     this->gridLayout = new QGridLayout();
     this->gridLayout->addWidget(this->welcomeMessageLabel,0,0,1,2);
     this->gridLayout->addWidget(this->createModelButton, 1,0,1,1);
