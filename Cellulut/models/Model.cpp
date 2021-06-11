@@ -105,3 +105,9 @@ void Model::add_Rule_int(Rule_int* new_rule_int)
     return;
 }
 
+void Model::add_Rule_ext(Rule_ext* new_rule_ext)
+{
+    this->rule_ext->push_back(new_rule_ext);
+    return;
+}
+

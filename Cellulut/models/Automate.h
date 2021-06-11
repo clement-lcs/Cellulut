@@ -33,7 +33,9 @@ class Automate // Singleton
 
         unsigned int count_nearby_state(unsigned int x, unsigned int y, unsigned int state_index);
 
-        unsigned int check_rule_int(unsigned int x, unsigned int y, unsigned int rule_index);
+        unsigned int check_rule_int(unsigned int x, unsigned int y, unsigned int rule_int_index);
+
+        unsigned int check_rule_ext(unsigned int x, unsigned int y, unsigned int rule_ext_index);
 
         void next_generation();
 

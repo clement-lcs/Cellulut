@@ -163,9 +163,9 @@ void Automate::random_init()
 unsigned int Automate::count_nearby_state(unsigned int x, unsigned int y, unsigned int state_index)
 {
     unsigned int k = 0;
-    for (int i=0; i < 3; i++)
+    for (unsigned int i=0; i < 3; i++)
     {
-        for(int j=0; j < 3; j++)
+        for(unsigned int j=0; j < 3; j++)
         {
             if (i==1 and j==1)
                 continue;
@@ -173,52 +173,98 @@ unsigned int Automate::count_nearby_state(unsigned int x, unsigned int y, unsign
             int column = y + j - 1;
             if (row < 0)
                 row = Grid::getGrid()->getRows() - 1;
+            else if (row == Grid::getGrid()->getRows())
+                row = 0;
             if (column < 0)
                 column = Grid::getGrid()->getColumns() - 1;
-            if (row == Grid::getGrid()->getRows())
-                row = 0;
-            if (column == Grid::getGrid()->getColumns())
+            else if (column == Grid::getGrid()->getColumns())
                 column = 0;
-            if (Grid::getGrid()->getlistCells()[row][column].getState()->getIndex() == state_index)
+            if (this->getModel()->getSurrounding()->getInteraction()->at(i*(this->getModel()->getSurrounding()->getRadius()*2+1) + j) and Grid::getGrid()->getlistCells()[row][column].getState()->getIndex() == state_index)
                 k += 1;
         }
     }
     return k;
 }
 
-unsigned int Automate::check_rule_int(unsigned int x, unsigned int y, unsigned int rule_index)
+unsigned int Automate::check_rule_int(unsigned int x, unsigned int y, unsigned int rule_int_index)
 {
     Cell current_cell = Grid::getGrid()->getlistCells()[x][y];
-    Rule_int* current_rule = this->getModel()->getRule_int()->at(rule_index);
+    Rule_int* current_rule = this->getModel()->getRule_int()->at(rule_int_index);
     if (current_cell.getState()->getIndex() == current_rule->getRule_current_state())
         if (!current_rule->getRule_nb_nearby() or count_nearby_state(x,y,current_rule->getRule_state_nearby()) == current_rule->getRule_nb_nearby())
             return 1;
     return 0;
 }
 
+unsigned int Automate::check_rule_ext(unsigned int x, unsigned int y, unsigned int rule_ext_index)
+{
+    Cell current_cell = Grid::getGrid()->getlistCells()[x][y];
+    Rule_ext* current_rule = this->getModel()->getRule_ext()->at(rule_ext_index);
+    unsigned int current_radius = current_rule->getRadius();
+    if (current_cell.getState()->getIndex() == current_rule->getCurrent_config()->at((current_radius*2+1)*current_radius+current_radius))
+    {
+        for (unsigned int i=0; i < current_radius*2+1; i++)
+        {
+            for(unsigned int j=0; j < current_radius*2+1; j++)
+            {
+                if (i==1 and j==1)
+                    continue;
+                int row = x + i - current_radius;
+                int column = y + j - current_radius;
+                if (row < 0)
+                    row = Grid::getGrid()->getRows() - 1;
+                else if (row == Grid::getGrid()->getRows())
+                    row = 0;
+                if (column < 0)
+                    column = Grid::getGrid()->getColumns() - 1;
+                else if (column == Grid::getGrid()->getColumns())
+                    column = 0;
+                if (Grid::getGrid()->getlistCells()[row][column].getState()->getIndex() != current_rule->getCurrent_config()->at(i*(current_radius*2+1)+j))
+                    return 0;
+            }
+        }
+        return 1;
+    }
+    return 0;
+}
+
 void Automate::next_generation()
 {
-    // Initialize next_grid with 0
+    cout<<"Calcul next generation :"<<endl;
+    // Initialize next_grid with values from current grid
     unsigned int** next_grid = new unsigned int*[Grid::getGrid()->getRows()];
         for (unsigned int i=0; i < Grid::getGrid()->getRows(); i++)
         {
             next_grid[i] = new unsigned int[Grid::getGrid()->getColumns()];
             for (unsigned int j=0; j < Grid::getGrid()->getColumns(); j++)
-                next_grid[i][j] = 0;
+                next_grid[i][j] = Grid::getGrid()->getlistCells()[i][j].getState()->getIndex();
         }
 
     // Check rules for each cell
-    for (unsigned int i=0; i < Grid::getGrid()->getRows(); i++){
-        for (unsigned int j=0; j < Grid::getGrid()->getColumns(); j++)
-        {
-            for(unsigned int k = 0; k < this->model->getRule_int()->size(); k++)
+        //Intentional rules
+    if (this->model->getRule_int()->size())
+        for (unsigned int i=0; i < Grid::getGrid()->getRows(); i++){
+            for (unsigned int j=0; j < Grid::getGrid()->getColumns(); j++)
             {
-                if (check_rule_int(i, j, k))
-                    next_grid[i][j] = this->model->getRule_int()->at(k)->getRule_next_state();
+                for(unsigned int k = 0; k < this->model->getRule_int()->size(); k++)
+                {
+                    if (check_rule_int(i, j, k))
+                        next_grid[i][j] = this->model->getRule_int()->at(k)->getRule_next_state();
+                }
             }
         }
-    }
-
+        // Extensional rules
+    if (this->model->getRule_ext()->size())
+        for (unsigned int i=0; i < Grid::getGrid()->getRows(); i++){
+            for (unsigned int j=0; j < Grid::getGrid()->getColumns(); j++)
+            {
+                for(unsigned int k = 0; k < this->model->getRule_ext()->size(); k++)
+                {
+                    if (check_rule_ext(i, j, k))
+                        next_grid[i][j] = this->model->getRule_ext()->at(k)->getNext_state_index();
+                }
+            }
+        }
     // Put new values in Grid
     for (unsigned int i=0; i < Grid::getGrid()->getRows(); i++)
     {

@@ -30,7 +30,7 @@ void Surrounding::setInteraction(vector<bool>*_interaction){this->interaction = 
 
 void Surrounding::afficher_surround()
 {
-    unsigned int size = radius * 2 + 1;
+    unsigned int size = this->radius * 2 + 1;
     for (unsigned int i = 0; i < size; i++)
     {
         for (unsigned int j = 0; j < size; j++)

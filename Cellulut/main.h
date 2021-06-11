@@ -14,6 +14,8 @@ using namespace std;
 #include <vector>
 #include <typeinfo>
 #include <cstdlib>
+#include <unistd.h>
+#include <math.h>
 #include <QDebug>
 
 #endif // MAIN
