@@ -87,7 +87,6 @@ void Automate::random_init()
 
 unsigned int Automate::count_nearby_state(unsigned int x, unsigned int y, unsigned int state_index)
 {
-    /*
     unsigned int k = 0;
     for (int i=0; i < 3; i++)
     {
@@ -98,19 +97,18 @@ unsigned int Automate::count_nearby_state(unsigned int x, unsigned int y, unsign
             int row = x + i - 1;
             int column = y + j - 1;
             if (row < 0)
-                row = Grid::getGrid()->getRows() - 1;
+                row = Grid::getGrid()->getSize() - 1;
             if (column < 0)
-                column = Grid::getGrid()->getColumns() - 1;
-            if (row == Grid::getGrid()->getRows())
+                column = Grid::getGrid()->getSize() - 1;
+            if (row == Grid::getGrid()->getSize())
                 row = 0;
-            if (column == Grid::getGrid()->getColumns())
+            if (column == Grid::getGrid()->getSize())
                 column = 0;
-            if (Grid::getGrid()->getlistCells()[row][column].getState()->getIndex() == state_index)
+            if (Grid::getGrid()->getCells()->at(Cell::getHashFromPos(column, row))->getState()->getIndex() == state_index)
                 k += 1;
         }
     }
     return k;
-    */
 }
 
 unsigned int Automate::check_rule_int(unsigned int x, unsigned int y, unsigned int rule_index)
@@ -148,7 +146,7 @@ void Automate::next_generation()
     {
         for (unsigned int j=0; j < Grid::getGrid()->getSize(); j++)
         {
-            Grid::getGrid()->getCells()->at(Cell::getHashFromPos(i,j))->setState(this->model->getListStates()->at(new_grid[i][j]));
+            Grid::getGrid()->getCells()->at(Cell::getHashFromPos(j,i))->setState(this->model->getListStates()->at(new_grid[i][j]));
         }
     }
     return;
