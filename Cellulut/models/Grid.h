@@ -15,10 +15,11 @@ class Grid // Singleton
         static Grid* getGrid() noexcept {return singleton;}
         ~Grid() = default;
 
-        unsigned int getSize() const {return this->size;}
-        void setSize(unsigned int _size){this->size=_size;}
-        map<string, Cell*>* getCells() const{return this->mapCells;}
-        void setCells(map<string, Cell*>* _cells){this->mapCells = _cells;}
+        unsigned int getSize() const;
+        map<string, Cell*>* getCells() const;
+
+        void setSize(unsigned int _size);
+        void setCells(map<string, Cell*>* _cells);
 
         void removeAllCells();
         map<int,int> countNbCellsPerState();

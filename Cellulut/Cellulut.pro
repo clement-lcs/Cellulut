@@ -53,5 +53,3 @@ FORMS +=
 
 RESOURCES += \
     Cellulut.qrc
-
-

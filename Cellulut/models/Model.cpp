@@ -1,7 +1,7 @@
 #include "main.h"
 #include "models/Model.h"
 
-Model::Model(unsigned int _id, string _title, string _description, string _author, string _date) : id(_id), title(_title), description(_description), author(_author), date_creation(_date)
+Model::Model(unsigned int _id_model, string _title, string _description, string _author, string _date) : id_model(_id_model), title(_title), description(_description), author(_author), date_creation(_date)
 {
     this->listStates = new vector<State*>;
     this->surrounding = nullptr;
@@ -10,7 +10,7 @@ Model::Model(unsigned int _id, string _title, string _description, string _autho
 }
 
 
-unsigned int Model::getId() const{return this->id;}
+unsigned int Model::getId_Model() const{return this->id_model;}
 
 string Model::getTitle() const{return this->title;}
 
@@ -55,7 +55,7 @@ State* Model::get_State(unsigned int _index)
             return listStates->at(i);
         }
     }
-    cout<<"This state index doesn't exists"<<endl;
+    cout<<"This state index doesn't exist"<<endl;
     return nullptr;
 }
 
@@ -70,17 +70,20 @@ void Model::add_State(State* new_state)
         if(listStates->at(i)->getIndex() == new_state->getIndex())
         {
             //throw invalid_argument("State index already exists, index : " + to_string(new_state->getIndex()));
+            cout<<"State index already exists"<<endl;
+            return;
         }
     }
     this->listStates->push_back(new_state);
-    cout<<"State added"<<endl;
+    cout<<"State '"<<new_state->getLabel()<<"' added to '"<<this->getTitle()<<"'"<<endl;
     return;
 }
 
 void Model::del_State(State* _state)
 {
-    if (!_state->getIndex()){
-        cout<<"You can't delete default state"<<endl;
+    if (this->listStates->size() == 1)
+    {
+        cout<<"At least 1 state needed"<<endl;
         return;
     }
     for(unsigned int i = 0; i < listStates->size(); i++)
@@ -88,15 +91,23 @@ void Model::del_State(State* _state)
         if(listStates->at(i) == _state)
         {
             listStates->erase(listStates->begin()+i);
-            cout<<"State deleted"<<endl;
+            cout<<"State '"<<_state->getLabel()<<"' deleted"<<endl;
             return;
         }
     }
+    cout<<"This state doesn't exist";
+    return;
 }
 
 void Model::add_Rule_int(Rule_int* new_rule_int)
 {
     this->rule_int->push_back(new_rule_int);
+    return;
+}
+
+void Model::add_Rule_ext(Rule_ext* new_rule_ext)
+{
+    this->rule_ext->push_back(new_rule_ext);
     return;
 }
 

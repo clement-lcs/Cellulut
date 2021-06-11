@@ -23,8 +23,8 @@ class Cell
         void setY(int _y);
         void setState(State* _state);
 
-        string getHash() const {return to_string(x)+"-"+to_string(y);}
-        static string getHashFromPos(int posX, int posY) { return to_string(posX)+"-"+to_string(posY);}
+        string getHash() const;
+        static string getHashFromPos(int posX, int posY);
 };
 
 

@@ -10,7 +10,7 @@ ModelsManager::ModelsManager(DatabaseManager *databaseManager) : databaseManager
 
 vector<Model*>* ModelsManager::findAllModels()
 {
-    qInfo() <<  "ModelsManager::findAllModels()";
+    /*qInfo() <<  "ModelsManager::findAllModels()";
 
     QSqlQuery query("SELECT * FROM models", this->databaseManager->getDb() );
 
@@ -34,5 +34,5 @@ vector<Model*>* ModelsManager::findAllModels()
         result->push_back(model);
     }
 
-    return result;
+    return result;*/
 }
