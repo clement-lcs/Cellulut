@@ -29,8 +29,6 @@ class Automate // Singleton
 
         void random_init();
 
-        void manual_init();
-
         unsigned int count_nearby_state(unsigned int x, unsigned int y, unsigned int state_index);
 
         unsigned int check_rule_int(unsigned int x, unsigned int y, unsigned int rule_int_index);

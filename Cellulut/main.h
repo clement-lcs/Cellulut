@@ -9,6 +9,9 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
+#define MIN_SIMULATION_TICK 500
+#define MAX_SIMULATION_SPEED 4
+
 using namespace std;
 
 #include <string>
@@ -42,6 +45,8 @@ using namespace std;
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QToolButton>
+#include <QThread>
+#include <QMutex>
 
 #include "ui/UIUtils.h"
 

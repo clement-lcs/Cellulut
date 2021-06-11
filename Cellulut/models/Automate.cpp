@@ -52,6 +52,8 @@ Automate::Automate()
     Library::getLibrary()->getListModels()->at(1)->add_Rule_int(brians_brain_rule_1);
     Library::getLibrary()->getListModels()->at(1)->add_Rule_int(brians_brain_rule_2);
     Library::getLibrary()->getListModels()->at(1)->add_Rule_int(brians_brain_rule_3);
+
+    this->model = Library::getLibrary()->getListModels()->at(0);
 }
 
 
@@ -100,44 +102,6 @@ State* Automate::random_state() // Return random state in listStates
       first = false;
    }
    return this->getModel()->getListStates()->at(rand() % (this->getModel()->getListStates()->size()));
-}
-
-
-
-void Automate::manual_init()
-{
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(0,0))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(0,1))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(0,2))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(0,3))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(0,4))->setState(this->model->getListStates()->at(0));
-
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(1,0))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(1,1))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(1,2))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(1,3))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(1,4))->setState(this->model->getListStates()->at(0));
-
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(2,0))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(2,1))->setState(this->model->getListStates()->at(1));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(2,2))->setState(this->model->getListStates()->at(1));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(2,3))->setState(this->model->getListStates()->at(1));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(2,4))->setState(this->model->getListStates()->at(0));
-
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(3,0))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(3,1))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(3,2))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(3,3))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(3,4))->setState(this->model->getListStates()->at(0));
-
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(4,0))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(4,1))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(4,2))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(4,3))->setState(this->model->getListStates()->at(0));
-    Grid::getGrid()->getCells()->at(Cell::getHashFromPos(4,4))->setState(this->model->getListStates()->at(0));
-
-    this->getHistoric()->clear();
-    save_current_config();
 }
 
 

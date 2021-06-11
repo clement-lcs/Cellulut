@@ -6,6 +6,7 @@
 #include "SimulationBoard.h"
 #include "StatesDisplay.h"
 #include "SimulationButtonsBar.h"
+#include "SimulationThread.h"
 #include "ui/UIEngine.h"
 
 QT_BEGIN_NAMESPACE
@@ -25,18 +26,26 @@ private:
     UIEngine *uiEngine;
     SimulationBoard *board;
     Model *modelForSimulation;
+    SimulationThread *simulationThread;
 
     QLabel *modelTitle;
     QLabel *modelDescription;
     QLabel *modelAuthor;
     QLabel *modelDate;
 
+    bool simulationIsRunning = false;
+
+    int speedFactor = 1;
     QLineEdit *inputSize;
     QSlider *sliderSize;
     QWidget *sizeDisplay;
     StatesDisplay *statesDisplay;
     SimulationButtonsBar *simulationButtonsBar;
     QPushButton *randomConfigurationButton;
+    QWidget *simulationSpeed;
+    QPushButton *increaseSimulationSpeed;
+    QPushButton *decreaseSimulationSpeed;
+    QLabel *simulationSpeedFactorLabel;
 
     QGridLayout *gridLayout;
     QHBoxLayout *simulationButtonsLayout;
@@ -48,12 +57,15 @@ private:
     void initEvents();
     void updateInputSizeValueFromInt(int newValue);
     void updateInputSizeValueFromString(QString newValue);
-    void onClickStepForward();
+    void generateNextStep();
     void onClickRandomConfiguration();
+    void onClickStart();
+    void onClickStop();
+    void onClickIncreaseSpeed();
+    void onClickDecreaseSpeed();
     void changeGridSize(int newValue);
 
-    const char *styleSheet =
-            "";
+    const char *styleSheet = "";
 };
 
 #endif // SIMULATIONVIEW_H
