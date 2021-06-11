@@ -18,7 +18,7 @@ SimulationBoard::~SimulationBoard()
 }
 
 
-void SimulationBoard::gridSizeChanged(){
+void SimulationBoard::refreshGrid(){
     update();
 }
 

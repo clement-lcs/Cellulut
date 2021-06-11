@@ -36,6 +36,7 @@ private:
     QWidget *sizeDisplay;
     StatesDisplay *statesDisplay;
     SimulationButtonsBar *simulationButtonsBar;
+    QPushButton *randomConfigurationButton;
 
     QGridLayout *gridLayout;
     QHBoxLayout *simulationButtonsLayout;
@@ -48,6 +49,7 @@ private:
     void updateInputSizeValueFromInt(int newValue);
     void updateInputSizeValueFromString(QString newValue);
     void onClickStepForward();
+    void onClickRandomConfiguration();
     void changeGridSize(int newValue);
 
     const char *styleSheet =

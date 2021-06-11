@@ -36,6 +36,9 @@ SimulationView::SimulationView(QWidget *parent, UIEngine *_uiEngine) : QWidget(p
     setLayout(this->gridLayout);
     setStyleSheet(tr(this->styleSheet));
 
+    this->randomConfigurationButton = new QPushButton("Configuration automatique");
+    this->randomConfigurationButton->setFont(UIUtils::getFont(12,false,false));
+
     setupLabelsForModel();
     setupGridLayout();
     initEvents();
@@ -47,6 +50,7 @@ SimulationView::~SimulationView(){
     delete board;
     delete inputSize;
     delete sliderSize;
+    delete randomConfigurationButton;
 
     qInfo() << "SimulationView::SimulationView - destructor";
 }
@@ -56,6 +60,7 @@ void SimulationView::initEvents(){
     connect(inputSize, &QLineEdit::textEdited, this , &SimulationView::updateInputSizeValueFromString );
     connect(board, &SimulationBoard::initialConfigurationChanged, statesDisplay, &StatesDisplay::refreshCounters);
     connect(simulationButtonsBar, &SimulationButtonsBar::stepForward, this, &SimulationView::onClickStepForward);
+    connect(randomConfigurationButton, &QPushButton::clicked, this, &SimulationView::onClickRandomConfiguration);
     qInfo() << "SimulationView::initEvents - events binded";
 }
 
@@ -78,7 +83,7 @@ void SimulationView::changeGridSize(int newValue){
     if(newValue<MIN_GRID_SIZE || newValue>MAX_GRID_SIZE) return;
     Grid::getGrid()->removeAllCells();
     Automate::getAutomate()->init_Grid(newValue);
-    this->board->gridSizeChanged();
+    this->board->refreshGrid();
     this->inputSize->setText(QString::number(newValue));
 }
 
@@ -90,6 +95,7 @@ void SimulationView::setupGridLayout(){
     this->gridLayout->addWidget(this->modelDate, 3, 1);
     this->gridLayout->addWidget(this->sizeDisplay, 5, 0, 1,2);
     this->gridLayout->addWidget(this->sliderSize, 6, 0, 1,2);
+    this->gridLayout->addWidget(this->randomConfigurationButton, 7, 0, 1, 2);
     this->gridLayout->addWidget(this->board, 1, 2, 7, 4);
     this->gridLayout->addWidget(createLabel("Etats :", "states", 12, false, false), 1, 6,1,2);
     this->gridLayout->addWidget(this->statesDisplay, 2,6,6,2);
@@ -119,5 +125,10 @@ QLabel *SimulationView::createLabel(const QString &text, const QString &objectNa
 
 void SimulationView::onClickStepForward(){
     Automate::getAutomate()->next_generation();
-    this->board->gridSizeChanged();
+    this->board->refreshGrid();
+}
+
+void SimulationView::onClickRandomConfiguration(){
+    Automate::getAutomate()->random_init();
+    this->board->refreshGrid();
 }

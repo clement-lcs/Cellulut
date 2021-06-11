@@ -27,7 +27,6 @@ void Automate::init_Grid(int size)
 
 State* Automate::random_state() // Return random state in listStates
 {
-    /*
    static bool first = true;
    if (first)
    {
@@ -35,7 +34,6 @@ State* Automate::random_state() // Return random state in listStates
       first = false;
    }
    return this->getModel()->getListStates()->at(rand() % (this->getModel()->getListStates()->size()));
-   */
 }
 
 void Automate::manual_init()
@@ -75,14 +73,16 @@ void Automate::manual_init()
 
 void Automate::random_init()
 {
-    /*
-    for (unsigned int i=0; i < Grid::getGrid()->getRows(); i++)
-    {
-        for (unsigned int j=0; j < Grid::getGrid()->getColumns(); j++)
-        {
-            Grid::getGrid()->getlistCells()[i][j].setState(random_state());
+    Grid *grid=Grid::getGrid();
+    int gridSize=grid->getSize();
+    qInfo()<<"gridSize="<<gridSize;
+    for(unsigned int posY = 0; posY < gridSize;posY++){
+        for(unsigned int posX=0; posX<gridSize; posX++){
+            Cell *cell = grid->getCells()->at(Cell::getHashFromPos(posX,posY));
+            cell->setState(this->random_state());
         }
-    }*/
+
+    }
 }
 
 unsigned int Automate::count_nearby_state(unsigned int x, unsigned int y, unsigned int state_index)

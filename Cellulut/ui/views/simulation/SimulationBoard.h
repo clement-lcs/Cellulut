@@ -14,7 +14,7 @@ public:
     SimulationBoard(QWidget *parent = nullptr);
     ~SimulationBoard();
 public slots:
-    void gridSizeChanged();
+    void refreshGrid();
 protected:
     void paintEvent(QPaintEvent *pe) override;
     void mousePressEvent(QMouseEvent *event) override;
