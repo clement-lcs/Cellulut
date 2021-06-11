@@ -6,6 +6,7 @@
 #include "SimulationBoard.h"
 #include "StatesDisplay.h"
 #include "SimulationButtonsBar.h"
+#include "SimulationThread.h"
 #include "ui/UIEngine.h"
 
 QT_BEGIN_NAMESPACE
@@ -25,11 +26,14 @@ private:
     UIEngine *uiEngine;
     SimulationBoard *board;
     Model *modelForSimulation;
+    SimulationThread *simulationThread;
 
     QLabel *modelTitle;
     QLabel *modelDescription;
     QLabel *modelAuthor;
     QLabel *modelDate;
+
+    bool simulationIsRunning = false;
 
     QLineEdit *inputSize;
     QSlider *sliderSize;
@@ -50,6 +54,10 @@ private:
     void updateInputSizeValueFromString(QString newValue);
     void onClickStepForward();
     void onClickRandomConfiguration();
+    void onClickStart();
+    void onClickStop();
+    void runSimulation();
+    void stopSimulation();
     void changeGridSize(int newValue);
 
     const char *styleSheet =

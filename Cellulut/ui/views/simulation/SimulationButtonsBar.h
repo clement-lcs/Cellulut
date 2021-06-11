@@ -12,7 +12,7 @@ public:
 signals:
     void start();
     void stepForward();
-    void pause();
+    void stop();
     void forward();
 private:
     QHBoxLayout *hboxLayout;

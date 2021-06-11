@@ -42,6 +42,8 @@ using namespace std;
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QToolButton>
+#include <QThread>
+#include <QMutex>
 
 #include "ui/UIUtils.h"
 

@@ -43,6 +43,9 @@ SimulationView::SimulationView(QWidget *parent, UIEngine *_uiEngine) : QWidget(p
     setupGridLayout();
     initEvents();
 
+    this->simulationThread = new SimulationThread(this);
+    connect(this->simulationThread, SIGNAL(nextStepCalculated), this, SLOT(onNextStepCalculated));
+
     qInfo() << "SimulationView::SimulationView - constructor";
 }
 
@@ -61,6 +64,8 @@ void SimulationView::initEvents(){
     connect(board, &SimulationBoard::initialConfigurationChanged, statesDisplay, &StatesDisplay::refreshCounters);
     connect(simulationButtonsBar, &SimulationButtonsBar::stepForward, this, &SimulationView::onClickStepForward);
     connect(randomConfigurationButton, &QPushButton::clicked, this, &SimulationView::onClickRandomConfiguration);
+    connect(simulationButtonsBar, &SimulationButtonsBar::start, this, &SimulationView::onClickStart);
+    connect(simulationButtonsBar, &SimulationButtonsBar::stop, this, &SimulationView::onClickStop);
     qInfo() << "SimulationView::initEvents - events binded";
 }
 
@@ -131,4 +136,14 @@ void SimulationView::onClickStepForward(){
 void SimulationView::onClickRandomConfiguration(){
     Automate::getAutomate()->random_init();
     this->board->refreshGrid();
+}
+
+void SimulationView::onClickStart(){
+    qInfo() << "SimulationView::onClickStart";
+    this->simulationThread->start();
+}
+
+void SimulationView::onClickStop(){
+    qInfo() << "SimulationView::onClickStop";
+    this->simulationThread->Stop = true;
 }
