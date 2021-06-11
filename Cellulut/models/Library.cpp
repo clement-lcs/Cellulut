@@ -3,48 +3,93 @@
 
 Library* Library::singleton = new Library;
 
-vector<Model*>* Library::getListModels(){return listModels;}
+vector<Surrounding*>* Library::getListSurroundings() const{return this->listSurroundings;}
 
-void Library::add_Model(Model* new_model)
+vector<Model*>* Library::getListModels() const{return this->listModels;}
+
+
+void Library::create_Surrounding(string _name)
 {
-    for(unsigned int i = 0; i < listModels->size(); i++)
+    Surrounding* new_surrounding = new Surrounding(this->listSurroundings->size(), _name);
+    this->listSurroundings->push_back(new_surrounding);
+    cout<<"Create Surrounding '"<<new_surrounding->getName()<<"' with index "<<new_surrounding->getId_Surrounding()<<endl;
+
+    /*for(unsigned int i = 0; i < listSurroundings->size(); i++)
     {
-        if(listModels->at(i) == new_model)
+        if(listSurroundings->at(i)->getId_Surrounding() == new_surrounding->getId_Surrounding())
         {
-            //throw invalid_argument("This model already exists \n");
-            cout<<"This model already exists"<<endl;
+            //throw invalid_argument("Surrounding index already exists, index : " + to_string(new_surrounding->getId_Surrounding()));
+            cout<<"Surrounding index already exists"<<endl;
             return;
         }
     }
+    this->listSurroundings->push_back(new_surrounding);
+    cout<<"Surrounding added"<<endl;
+    return;*/
+}
+
+Surrounding* Library::get_Surrounding(unsigned int surrounding_id)
+{
+    for(unsigned int i = 0; i < listSurroundings->size(); i++)
+    {
+        if(listSurroundings->at(i)->getId_Surrounding() == surrounding_id)
+        {
+            return listSurroundings->at(i);
+        }
+    }
+    cout<<"This surrounding doesn't exist";
+    return nullptr;
+}
+
+void Library::del_Surrounding(unsigned int surrounding_id)
+{
+    /*for(unsigned int i = 0; i < listSurroundings->size(); i++)
+    {
+        if(listSurroundings->at(i) == _surrounding)
+        {
+            listSurroundings->erase(listSurroundings->begin()+i);
+            cout<<"Surrounding deleted"<<endl;
+            return;
+        }
+    }
+    cout<<"This surrounding doesn't exist";
+    return;*/
+}
+
+
+void Library::create_Model(string _title, string _description, string _author, string _date)
+{
+    Model* new_model = new Model(this->listModels->size(), _title, _description, _author, _date);
     this->listModels->push_back(new_model);
-    cout<<"Model added"<<endl;
-    return;
+    cout<<"Create Model '"<<new_model->getTitle()<<"' with index "<<new_model->getId_Model()<<endl;
 }
 
 Model* Library::get_Model(unsigned int model_id)
 {
-    for(unsigned int i = 0; i < listModels->size(); i++)
-    {
-        if(listModels->at(i)->getId() == model_id)
-        {
-            return listModels->at(i);
-        }
+    if (model_id > this->listModels->size()){
+        cout<<"This model doesn't exists";
+        return nullptr;
     }
-    cout<<"This model doesn't exists";
-    return nullptr;
+    return this->listModels->at(model_id);
 }
 
-void Library::del_Model(Model* _model)
+void Library::del_Model(unsigned int model_id)
 {
-    for(unsigned int i = 0; i < listModels->size(); i++)
+    if (model_id > Library::getLibrary()->getListModels()->size() - 1)
     {
-        if(listModels->at(i) == _model)
-        {
-            listModels->erase(listModels->begin()+i);
-            cout<<"Model deleted"<<endl;
-            return;
-        }
+        cout<<"This model doesn't exist"<<endl;
     }
-    cout<<"This model doesn't exists";
+    else if (model_id == 0 or model_id == 1 or model_id == 2)
+    {
+        cout<<"You can't delete pre-existing model"<<endl;
+    }
+    else {
+        for(unsigned int i=model_id; i < getLibrary()->getListModels()->size(); i++)
+        {
+            this->getListModels()->at(i)->id_model--;
+        }
+        cout<<"Model '"<<this->getListModels()->at(model_id)->getTitle()<<"' deleted"<<endl;
+        this->listModels->erase(this->listModels->begin()+model_id);
+    }
     return;
 }

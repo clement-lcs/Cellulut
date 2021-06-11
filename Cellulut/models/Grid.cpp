@@ -9,6 +9,16 @@ Grid::Grid(){
     qInfo() << "Grid::Grid - constructor";
 }
 
+unsigned int Grid::getSize() const{return this->size;}
+
+map<string, Cell*>* Grid::getCells() const{return this->mapCells;}
+
+
+void Grid::setSize(unsigned int _size){this->size = _size;}
+
+void Grid::setCells(map<string, Cell*>* _cells){this->mapCells = _cells;}
+
+
 void Grid::removeAllCells(){
     map<string,Cell*>::iterator it;
     for(map<std::string, Cell*>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)

@@ -10,18 +10,20 @@ class Automate // Singleton
     protected :
         static Automate* singleton; // Pointer to singleton
         Automate(); // Private constructor
-        Model* model;
-        vector<int**>* historic;
+        Model* model = nullptr; //current_model
+        vector<unsigned int**>* historic = new vector<unsigned int**>;
     public :
-        static Automate* getAutomate() noexcept {return singleton;}
         ~Automate() = default;
 
-        Model* getModel() const {return this->model;}
-        void setModel(Model* _model) {this->model = _model;}
+        Model* getModel() const;
+        vector<unsigned int**>* getHistoric() const;
 
-        void init_Grid(int size);
+        void setModel(Model* _model);
 
-        void clear_grid();
+        static Automate* getAutomate() noexcept {return singleton;}
+        void init_Grid(unsigned int size_grid);
+
+        void save_current_config();
 
         State* random_state();
 
@@ -31,9 +33,13 @@ class Automate // Singleton
 
         unsigned int count_nearby_state(unsigned int x, unsigned int y, unsigned int state_index);
 
-        unsigned int check_rule_int(unsigned int x, unsigned int y, unsigned int rule_index);
+        unsigned int check_rule_int(unsigned int x, unsigned int y, unsigned int rule_int_index);
+
+        unsigned int check_rule_ext(unsigned int x, unsigned int y, unsigned int rule_ext_index);
 
         void next_generation();
+
+        void afficher_historique(int x);
 
         void afficher_grid();
 };

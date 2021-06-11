@@ -9,7 +9,7 @@
 class Model
 {
     protected :
-        unsigned int id;
+        unsigned int id_model;
         string title;
         string description;
         string author;
@@ -18,11 +18,11 @@ class Model
         Surrounding* surrounding;
         vector<Rule_int*>* rule_int;
         vector<Rule_ext*>* rule_ext;
-    public :
-        Model(unsigned int _id = 0, string _title = "", string _description = "", string _author = "", string _date ="");
-        ~Model() = default;
+        Model(unsigned int _id, string _title, string _description, string _author, string _date);
 
-        unsigned int getId() const;
+    public :
+        ~Model() = default;
+        unsigned int getId_Model() const;
         string getTitle() const;
         string getDescription() const;
         string getAuthor() const;
@@ -46,11 +46,14 @@ class Model
         void del_State(State* _state);
 
         void add_Rule_int(Rule_int* new_rule_int);
+        void add_Rule_ext(Rule_ext* new_rule_ext);
 
         QString getTitleAsQString() const{return QString::fromStdString(this->title);}
         QString getDescriptionAsQString() const{return QString::fromStdString(this->description);}
         QString getAuthorAsQString() const{return QString::fromStdString(this->author);}
         QString getDateAsQString() const{return QString::fromStdString(this->date_creation);}
+
+        friend class Library;
 };
 
 

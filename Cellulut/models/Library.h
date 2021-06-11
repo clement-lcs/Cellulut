@@ -10,8 +10,8 @@ class Library // Singleton
     protected :
         static Library* singleton;  // Pointer to singleton
         Library() = default;  // Private constructor
-        vector<Model*>* listModels = new vector<Model*>;
         vector<Surrounding*>* listSurroundings = new vector<Surrounding*>;
+        vector<Model*>* listModels = new vector<Model*>;
     public :
         static Library* getLibrary() noexcept {return singleton;}
 
@@ -19,12 +19,16 @@ class Library // Singleton
         Library(const Library&) = delete;
         Library& operator=(const Library&) = delete;
 
-        vector<Model*>* getListModels();
-        vector<Surrounding*>* getListSurroundginds();
+        vector<Surrounding*>* getListSurroundings() const;
+        vector<Model*>* getListModels() const;
 
-        void add_Model(Model* new_model);
+        void create_Surrounding(string _name);
+        Surrounding* get_Surrounding(unsigned int surrounding_id);
+        void del_Surrounding(unsigned int surrounding_id);
+
+        void create_Model(string _title, string _description = "", string _author = "", string _date = "");
         Model* get_Model(unsigned int model_id);
-        void del_Model(Model* _model);
+        void del_Model(unsigned int model_id);
 };
 
 

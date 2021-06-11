@@ -47,6 +47,4 @@ using namespace std;
 
 #include "ui/UIUtils.h"
 
-void ajout_donnee();
-
 #endif // MAIN
