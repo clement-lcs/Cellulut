@@ -36,15 +36,33 @@ SimulationView::SimulationView(QWidget *parent, UIEngine *_uiEngine) : QWidget(p
     setLayout(this->gridLayout);
     setStyleSheet(tr(this->styleSheet));
 
+    // Random configuration button
     this->randomConfigurationButton = new QPushButton("Configuration automatique");
     this->randomConfigurationButton->setFont(UIUtils::getFont(12,false,false));
+
+    // Automatic simulation
+    this->simulationThread = new SimulationThread(this);
+
+    // Simulation Speed
+    this->simulationSpeed = new QWidget;
+    this->simulationSpeedFactorLabel = new QLabel("x1");
+    this->increaseSimulationSpeed = new QPushButton;
+    this->increaseSimulationSpeed->setIcon(QIcon(":/icons/forward.svg"));
+    this->increaseSimulationSpeed->setDisabled(true);
+    this->increaseSimulationSpeed->setToolTip("Accélérer la simulation");
+    this->decreaseSimulationSpeed = new QPushButton;
+    this->decreaseSimulationSpeed->setIcon(QIcon(":/icons/backward.svg"));
+    this->decreaseSimulationSpeed->setDisabled(true);
+    this->decreaseSimulationSpeed->setToolTip("Ralentir la simulation");
+    QHBoxLayout *simulationSpeedLayout = new QHBoxLayout;
+    simulationSpeedLayout->addWidget(simulationSpeedFactorLabel);
+    simulationSpeedLayout->addWidget(decreaseSimulationSpeed);
+    simulationSpeedLayout->addWidget(increaseSimulationSpeed);
+    this->simulationSpeed->setLayout(simulationSpeedLayout);
 
     setupLabelsForModel();
     setupGridLayout();
     initEvents();
-
-    this->simulationThread = new SimulationThread(this);
-    connect(this->simulationThread, SIGNAL(nextStepCalculated), this, SLOT(onNextStepCalculated));
 
     qInfo() << "SimulationView::SimulationView - constructor";
 }
@@ -62,10 +80,13 @@ void SimulationView::initEvents(){
     connect(sliderSize, &QSlider::valueChanged, this , &SimulationView::updateInputSizeValueFromInt );
     connect(inputSize, &QLineEdit::textEdited, this , &SimulationView::updateInputSizeValueFromString );
     connect(board, &SimulationBoard::initialConfigurationChanged, statesDisplay, &StatesDisplay::refreshCounters);
-    connect(simulationButtonsBar, &SimulationButtonsBar::stepForward, this, &SimulationView::onClickStepForward);
+    connect(simulationButtonsBar, &SimulationButtonsBar::stepForward, this, &SimulationView::generateNextStep);
     connect(randomConfigurationButton, &QPushButton::clicked, this, &SimulationView::onClickRandomConfiguration);
     connect(simulationButtonsBar, &SimulationButtonsBar::start, this, &SimulationView::onClickStart);
     connect(simulationButtonsBar, &SimulationButtonsBar::stop, this, &SimulationView::onClickStop);
+    connect(simulationThread, &SimulationThread::nextStepCalculated, this, &SimulationView::generateNextStep);
+    connect(increaseSimulationSpeed, &QPushButton::clicked, this, &SimulationView::onClickIncreaseSpeed);
+    connect(decreaseSimulationSpeed, &QPushButton::clicked, this, &SimulationView::onClickDecreaseSpeed);
     qInfo() << "SimulationView::initEvents - events binded";
 }
 
@@ -105,6 +126,7 @@ void SimulationView::setupGridLayout(){
     this->gridLayout->addWidget(createLabel("Etats :", "states", 12, false, false), 1, 6,1,2);
     this->gridLayout->addWidget(this->statesDisplay, 2,6,6,2);
     this->gridLayout->addWidget(this->simulationButtonsBar, 7,2,1,4);
+    this->gridLayout->addWidget(this->simulationSpeed, 7,6,1,2);
 }
 
 void SimulationView::setupLabelsForModel(){
@@ -129,7 +151,7 @@ QLabel *SimulationView::createLabel(const QString &text, const QString &objectNa
     return label;
 }
 
-void SimulationView::onClickStepForward(){
+void SimulationView::generateNextStep(){
     Automate::getAutomate()->next_generation();
     this->board->refreshGrid();
 }
@@ -141,10 +163,57 @@ void SimulationView::onClickRandomConfiguration(){
 
 void SimulationView::onClickStart(){
     qInfo() << "SimulationView::onClickStart";
+    this->increaseSimulationSpeed->setDisabled(false);
+    this->decreaseSimulationSpeed->setDisabled(true);
+    this->simulationButtonsBar->setStartButtonDisabled(true);
+    this->simulationButtonsBar->setStopButtonDisabled(false);
+    this->simulationButtonsBar->setStepForwardButtonDisabled(true);
+    this->decreaseSimulationSpeed->setDisabled(false);
+    this->inputSize->setDisabled(true);
+    this->sliderSize->setDisabled(true);
     this->simulationThread->start();
 }
 
 void SimulationView::onClickStop(){
     qInfo() << "SimulationView::onClickStop";
     this->simulationThread->Stop = true;
+    this->increaseSimulationSpeed->setDisabled(true);
+    this->decreaseSimulationSpeed->setDisabled(true);
+    this->simulationButtonsBar->setStartButtonDisabled(false);
+    this->simulationButtonsBar->setStopButtonDisabled(true);
+    this->simulationButtonsBar->setStepForwardButtonDisabled(false);
+    this->inputSize->setDisabled(false);
+    this->sliderSize->setDisabled(false);
+}
+
+void SimulationView::onClickIncreaseSpeed(){
+    this->speedFactor=this->speedFactor+1;
+    if(this->speedFactor<=MAX_SIMULATION_SPEED){
+        string speedFactorLabel = "x"+std::to_string(this->speedFactor);
+        this->simulationSpeedFactorLabel->setText(QString::fromStdString(speedFactorLabel));
+        this->simulationThread->setSleepDuration(MIN_SIMULATION_TICK/this->speedFactor);
+        if(this->speedFactor==MAX_SIMULATION_SPEED){
+            this->increaseSimulationSpeed->setDisabled(true);
+        }
+    }
+
+    if(this->speedFactor>1){
+        this->decreaseSimulationSpeed->setDisabled(false);
+    }
+
+}
+
+void SimulationView::onClickDecreaseSpeed(){
+    this->speedFactor=this->speedFactor-1;
+    if(this->speedFactor>=1){
+        string speedFactorLabel = "x"+std::to_string(this->speedFactor);
+        this->simulationSpeedFactorLabel->setText(QString::fromStdString(speedFactorLabel));
+        this->simulationThread->setSleepDuration(MIN_SIMULATION_TICK/this->speedFactor);
+        if(this->speedFactor==1){
+            this->decreaseSimulationSpeed->setDisabled(true);
+        }
+    }
+    if(this->speedFactor<MAX_SIMULATION_SPEED){
+        this->increaseSimulationSpeed->setDisabled(false);
+    }
 }

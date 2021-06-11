@@ -35,12 +35,17 @@ private:
 
     bool simulationIsRunning = false;
 
+    int speedFactor = 1;
     QLineEdit *inputSize;
     QSlider *sliderSize;
     QWidget *sizeDisplay;
     StatesDisplay *statesDisplay;
     SimulationButtonsBar *simulationButtonsBar;
     QPushButton *randomConfigurationButton;
+    QWidget *simulationSpeed;
+    QPushButton *increaseSimulationSpeed;
+    QPushButton *decreaseSimulationSpeed;
+    QLabel *simulationSpeedFactorLabel;
 
     QGridLayout *gridLayout;
     QHBoxLayout *simulationButtonsLayout;
@@ -52,12 +57,12 @@ private:
     void initEvents();
     void updateInputSizeValueFromInt(int newValue);
     void updateInputSizeValueFromString(QString newValue);
-    void onClickStepForward();
+    void generateNextStep();
     void onClickRandomConfiguration();
     void onClickStart();
     void onClickStop();
-    void runSimulation();
-    void stopSimulation();
+    void onClickIncreaseSpeed();
+    void onClickDecreaseSpeed();
     void changeGridSize(int newValue);
 
     const char *styleSheet =

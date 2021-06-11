@@ -2,18 +2,13 @@
 
 SimulationThread::SimulationThread(QObject *parent, bool b):QThread(parent), Stop(b)
 {
-
+    this->sleepDuration = MIN_SIMULATION_TICK;
 }
 
 void SimulationThread::run(){
     while(true){
-        QMutex mutex;
-        mutex.lock();
-        if(this->Stop) break;
-        mutex.unlock();
-
+        if(this->Stop) return;
         emit nextStepCalculated();
-
-        this->msleep(500);
+        this->msleep(this->sleepDuration);
     }
 }
