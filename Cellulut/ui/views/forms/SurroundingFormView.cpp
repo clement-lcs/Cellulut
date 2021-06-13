@@ -27,7 +27,7 @@ SurroundingFormView::SurroundingFormView(QWidget *_parent, UIEngine* _uiEngine):
 
     this->setLayout(this->gridLayout);
 
-    connect(this->surroundingRadiusInput, &QSpinBox::valueChanged, this->board, &SurroundingBoard::changeBoardSize);
+    connect(this->surroundingRadiusInput, &QSpinBox::textChanged, this->board, &SurroundingBoard::changeBoardSize);
     connect(this->submitFormButton, &QPushButton::clicked, this, &SurroundingFormView::onClickSubmit);
 }
 
