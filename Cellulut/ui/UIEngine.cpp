@@ -33,7 +33,12 @@ void UIEngine::changeToLoadModelFormView(){
 }
 
 void UIEngine::changeToCreateSurroundingFormView(){
-    SurroundingFormView *surroundingFormView = new SurroundingFormView(0, this);
+    SurroundingFormView *surroundingFormView = new SurroundingFormView(0, this, -1);
+    this->mainWindow->setCentralWidget(surroundingFormView);
+}
+
+void UIEngine::changeToEditSurroundingFormView(int index){
+    SurroundingFormView *surroundingFormView = new SurroundingFormView(0, this, index);
     this->mainWindow->setCentralWidget(surroundingFormView);
 }
 

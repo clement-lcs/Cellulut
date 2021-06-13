@@ -27,6 +27,7 @@ public slots:
     void changeToSimulationView();
     void changeToLoadModelFormView();
     void changeToCreateSurroundingFormView();
+    void changeToEditSurroundingFormView(int surroundingIndex);
     void changeToLibraryView();
 };
 
