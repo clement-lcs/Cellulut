@@ -9,7 +9,7 @@ SurroundingBoard::SurroundingBoard(QWidget *parent) : QFrame(parent)
     setFixedWidth(400);
 
     this->board = new map<string, bool>();
-    this->changeBoardSize(1);
+    this->changeBoardSize("1");
 
     qInfo() << "SurroundingBoard::SurroundingBoard - constructor";
 }
@@ -19,7 +19,8 @@ SurroundingBoard::~SurroundingBoard()
     qInfo() << "SurroundingBoard::~SurroundingBoard - destructor";
 }
 
-void SurroundingBoard::changeBoardSize(int newSize){
+void SurroundingBoard::changeBoardSize(QString newSizeAsStr){
+    int newSize = newSizeAsStr.toInt();
     this->board->clear();
     this->boardSize = newSize*2+1;
     int medianIndex = boardSize/2;

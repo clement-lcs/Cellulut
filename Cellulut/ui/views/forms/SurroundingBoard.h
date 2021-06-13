@@ -14,7 +14,7 @@ class SurroundingBoard : public QFrame
         int getBoardSize() const {return this->boardSize;}
         vector<bool> *getBoardAsVector();
     public slots:
-        void changeBoardSize(int newSize);
+        void changeBoardSize(QString newSize);
     protected:
         void paintEvent(QPaintEvent *pe) override;
         void mousePressEvent(QMouseEvent *event) override;
