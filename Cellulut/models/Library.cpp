@@ -1,18 +1,17 @@
 #include "main.h"
 #include "models/Library.h"
 
-Library* Library::singleton = new Library;
+Library *Library::singleton = new Library;
 
-vector<Surrounding*>* Library::getListSurroundings() const{return this->listSurroundings;}
+std::vector<Surrounding *> *Library::getListSurroundings() const { return this->listSurroundings; }
 
-vector<Model*>* Library::getListModels() const{return this->listModels;}
+std::vector<Model *> *Library::getListModels() const { return this->listModels; }
 
-
-void Library::create_Surrounding(string _name)
+void Library::create_Surrounding(std::string _name)
 {
-    Surrounding* new_surrounding = new Surrounding(this->listSurroundings->size(), _name);
+    Surrounding *new_surrounding = new Surrounding(this->listSurroundings->size(), _name);
     this->listSurroundings->push_back(new_surrounding);
-    cout<<"Create Surrounding '"<<new_surrounding->getName()<<"' with index "<<new_surrounding->getId_Surrounding()<<endl;
+    std::cout << "Create Surrounding '" << new_surrounding->getName() << "' with index " << new_surrounding->getId_Surrounding() << std::endl;
 
     /*for(unsigned int i = 0; i < listSurroundings->size(); i++)
     {
@@ -28,16 +27,16 @@ void Library::create_Surrounding(string _name)
     return;*/
 }
 
-Surrounding* Library::get_Surrounding(unsigned int surrounding_id)
+Surrounding *Library::get_Surrounding(unsigned int surrounding_id)
 {
-    for(unsigned int i = 0; i < listSurroundings->size(); i++)
+    for (unsigned int i = 0; i < listSurroundings->size(); i++)
     {
-        if(listSurroundings->at(i)->getId_Surrounding() == surrounding_id)
+        if (listSurroundings->at(i)->getId_Surrounding() == surrounding_id)
         {
             return listSurroundings->at(i);
         }
     }
-    cout<<"This surrounding doesn't exist";
+    std::cout << "This surrounding doesn't exist";
     return nullptr;
 }
 
@@ -56,18 +55,18 @@ void Library::del_Surrounding(unsigned int surrounding_id)
     return;*/
 }
 
-
-void Library::create_Model(string _title, string _description, string _author, string _date)
+void Library::create_Model(std::string _title, std::string _description, std::string _author, std::string _date)
 {
-    Model* new_model = new Model(this->listModels->size(), _title, _description, _author, _date);
+    Model *new_model = new Model(this->listModels->size(), _title, _description, _author, _date);
     this->listModels->push_back(new_model);
-    cout<<"Create Model '"<<new_model->getTitle()<<"' with index "<<new_model->getId_Model()<<endl;
+    std::cout << "Create Model '" << new_model->getTitle() << "' with index " << new_model->getId_Model() << std::endl;
 }
 
-Model* Library::get_Model(unsigned int model_id)
+Model *Library::get_Model(unsigned int model_id)
 {
-    if (model_id > this->listModels->size()){
-        cout<<"This model doesn't exists";
+    if (model_id > this->listModels->size())
+    {
+        std::cout << "This model doesn't exists";
         return nullptr;
     }
     return this->listModels->at(model_id);
@@ -77,19 +76,20 @@ void Library::del_Model(unsigned int model_id)
 {
     if (model_id > Library::getLibrary()->getListModels()->size() - 1)
     {
-        cout<<"This model doesn't exist"<<endl;
+        std::cout << "This model doesn't exist" << std::endl;
     }
     else if (model_id == 0 or model_id == 1 or model_id == 2)
     {
-        cout<<"You can't delete pre-existing model"<<endl;
+        std::cout << "You can't delete pre-existing model" << std::endl;
     }
-    else {
-        for(unsigned int i=model_id; i < getLibrary()->getListModels()->size(); i++)
+    else
+    {
+        for (unsigned int i = model_id; i < getLibrary()->getListModels()->size(); i++)
         {
             this->getListModels()->at(i)->id_model--;
         }
-        cout<<"Model '"<<this->getListModels()->at(model_id)->getTitle()<<"' deleted"<<endl;
-        this->listModels->erase(this->listModels->begin()+model_id);
+        std::cout << "Model '" << this->getListModels()->at(model_id)->getTitle() << "' deleted" << std::endl;
+        this->listModels->erase(this->listModels->begin() + model_id);
     }
     return;
 }

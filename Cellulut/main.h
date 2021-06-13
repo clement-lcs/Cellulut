@@ -12,7 +12,7 @@
 #define MIN_SIMULATION_TICK 500
 #define MAX_SIMULATION_SPEED 4
 
-using namespace std;
+//using namespace std;
 
 #include <string>
 #include <iostream>

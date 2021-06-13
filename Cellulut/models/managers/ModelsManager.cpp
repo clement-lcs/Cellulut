@@ -5,10 +5,10 @@
 
 ModelsManager::ModelsManager(DatabaseManager *databaseManager) : databaseManager(databaseManager)
 {
-    qInfo() <<  "ModelsManager::ModelsManager - constructor OK";
+    qInfo() << "ModelsManager::ModelsManager - constructor OK";
 }
 
-vector<Model*>* ModelsManager::findAllModels()
+std::vector<Model *> *ModelsManager::findAllModels()
 {
     /*qInfo() <<  "ModelsManager::findAllModels()";
 
@@ -25,10 +25,10 @@ vector<Model*>* ModelsManager::findAllModels()
     while (query.next())
     {
         int id = query.value(colID).toInt();
-        std::string title = query.value(colTitle).toString().toStdString();
-        std::string description = query.value(colDescription).toString().toStdString();
-        std::string author = query.value(colAuthor).toString().toStdString();
-        std::string dateOfCreation = query.value(colDateOfCreation).toString().toStdString();
+        std::std::string title = query.value(colTitle).toString().toStdString();
+        std::std::string description = query.value(colDescription).toString().toStdString();
+        std::std::string author = query.value(colAuthor).toString().toStdString();
+        std::std::string dateOfCreation = query.value(colDateOfCreation).toString().toStdString();
 
         Model *model = new Model(id,title,description,author,dateOfCreation);
         result->push_back(model);

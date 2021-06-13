@@ -16,7 +16,7 @@ LoadModelFormView::LoadModelFormView(QWidget *parent, UIEngine *_uiEngine) : QWi
     this->modelComboLabel = UIUtils::createLabel(tr("Modèle :"), 20, false, false);
 
     QStringList modelComboStringList;
-    vector<Model*> *listOfModels = Library::getLibrary()->getListModels();
+    std::vector<Model*> *listOfModels = Library::getLibrary()->getListModels();
     for(unsigned int i = 0; i < listOfModels->size(); i++){
         modelComboStringList << listOfModels->at(i)->getTitleAsQString();
     }

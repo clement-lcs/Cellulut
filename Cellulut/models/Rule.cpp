@@ -31,17 +31,17 @@ void Rule_int::setRule_next_state(unsigned int _next_state){this->list[3] = _nex
 
 Rule_ext::Rule_ext(unsigned int _index, unsigned int _radius) : next_state_index(_index), radius(_radius)
 {
-    this->current_config = new vector<int>;
+    this->current_config = new std::vector<int>;
 }
 
-vector<int>* Rule_ext::getCurrent_config() const{return this->current_config;}
+std::vector<int>* Rule_ext::getCurrent_config() const{return this->current_config;}
 
 unsigned int Rule_ext::getNext_state_index() const{return this->next_state_index;}
 
 unsigned int Rule_ext::getRadius() const{return this->radius;}
 
 
-void Rule_ext::setCurrent_config(vector<int>* _config){this->current_config = _config;}
+void Rule_ext::setCurrent_config(std::vector<int>* _config){this->current_config = _config;}
 
 void Rule_ext::setNext_state_index(unsigned int _index){this->next_state_index = _index;}
 
@@ -54,14 +54,14 @@ void Rule_ext::afficher_rule_ext()
     {
         for (unsigned int j = 0; j < size; j++)
         {
-            cout<<this->current_config->at(i*size+j)<<" ";
+            std::cout<<this->current_config->at(i*size+j)<<" ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
     return;
 }
 
-void Rule_ext::addConfigLine(vector<int> _configLine){
+void Rule_ext::addConfigLine(std::vector<int> _configLine){
     for(unsigned int i = 0; i < _configLine.size() ; i++){
         this->current_config->push_back(_configLine.at(i));
     }

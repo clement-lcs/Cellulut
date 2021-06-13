@@ -6,26 +6,26 @@
 
 class Cell
 {
-    protected :
-        int x;
-        int y;
-        State* state;
-    public :
-        Cell() = default;
-        ~Cell() = default;
-        Cell(int X, int Y): x(X), y(Y), state(nullptr){};
+protected:
+    int x;
+    int y;
+    State *state;
 
-        int getX() const;
-        int getY() const;
-        State* getState() const;
+public:
+    Cell() = default;
+    ~Cell() = default;
+    Cell(int X, int Y) : x(X), y(Y), state(nullptr){};
 
-        void setX(int _x);
-        void setY(int _y);
-        void setState(State* _state);
+    int getX() const;
+    int getY() const;
+    State *getState() const;
 
-        string getHash() const;
-        static string getHashFromPos(int posX, int posY);
+    void setX(int _x);
+    void setY(int _y);
+    void setState(State *_state);
+
+    std::string getHash() const;
+    static std::string getHashFromPos(int posX, int posY);
 };
-
 
 #endif // CELL_H

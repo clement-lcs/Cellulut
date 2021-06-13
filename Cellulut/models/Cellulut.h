@@ -9,14 +9,14 @@ class Cellulut
 private:
     ModelsManager* modelsManager;
     StatesManager* statesManager;
-    vector<Model*>* listOfModels;
+    std::vector<Model*>* listOfModels;
 
     void initListOfModels();
 public:
     Cellulut();
     ~Cellulut();
 
-    vector<Model*>* getListOfModels() const{ return this->listOfModels;}
+    std::vector<Model*>* getListOfModels() const{ return this->listOfModels;}
 
     void init();
 };

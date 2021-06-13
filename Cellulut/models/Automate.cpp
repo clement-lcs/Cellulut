@@ -93,7 +93,7 @@ Automate::Automate()
 
 Model* Automate::getModel() const{return this->model;}
 
-vector<unsigned int**>* Automate::getHistoric() const{return this->historic;}
+std::vector<unsigned int**>* Automate::getHistoric() const{return this->historic;}
 
 
 void Automate::setModel(Model* _model){this->model = _model;}
@@ -239,10 +239,10 @@ void Automate::afficher_historique(int x)
 {
     for (unsigned int i=0; i < Grid::getGrid()->getSize(); i++){
         for (unsigned int j=0; j < Grid::getGrid()->getSize(); j++)
-            cout<<this->getHistoric()->at(x)[i][j]<<" ";
-        cout<<endl;
+            std::cout<<this->getHistoric()->at(x)[i][j]<<" ";
+        std::cout<<std::endl;
         }
-    cout<<endl;
+    std::cout<<std::endl;
 }
 
 

@@ -5,11 +5,12 @@
 
 StatesManager::StatesManager(DatabaseManager *databaseManager) : databaseManager(databaseManager)
 {
-    qInfo() <<  "StatesManager::StatesManager - constructor OK";
+    qInfo() << "StatesManager::StatesManager - constructor OK";
 }
 
-vector<State*>* StatesManager::findAllStatesByModelID(int modelID) {
-    qInfo() <<  "StatesManager::findAllStatesByModelID()";
+std::vector<State *> *StatesManager::findAllStatesByModelID(int modelID)
+{
+    qInfo() << "StatesManager::findAllStatesByModelID()";
 
     QSqlQuery query(this->databaseManager->getDb());
     query.prepare("SELECT * FROM states where model_id = (:model_id)");
@@ -20,7 +21,7 @@ vector<State*>* StatesManager::findAllStatesByModelID(int modelID) {
     int colColor = query.record().indexOf("color");
     int colLabel = query.record().indexOf("label");
 
-    vector<State*>* result = new vector<State*>();
+    std::vector<State *> *result = new std::vector<State *>();
 
     while (query.next())
     {
@@ -28,7 +29,7 @@ vector<State*>* StatesManager::findAllStatesByModelID(int modelID) {
         std::string color = query.value(colColor).toString().toStdString();
         std::string label = query.value(colLabel).toString().toStdString();
 
-        State *model = new State(id,color,label);
+        State *model = new State(id, color, label);
         result->push_back(model);
     }
 

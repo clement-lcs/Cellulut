@@ -2,11 +2,11 @@
 
 StatesDisplay::StatesDisplay(QWidget *parent) :QWidget(parent)
 {
-    vector<State*>* listOfStates = Automate::getAutomate()->getModel()->getListStates();
+    std::vector<State*>* listOfStates = Automate::getAutomate()->getModel()->getListStates();
 
-    this->mapOfColors = new map<int,QWidget*>();
-    this->mapOfLabels = new map<int,QLabel*>();
-    this->mapOfCounts = new map<int,QLCDNumber*>();
+    this->mapOfColors = new std::map<int,QWidget*>();
+    this->mapOfLabels = new std::map<int,QLabel*>();
+    this->mapOfCounts = new std::map<int,QLCDNumber*>();
     this->layout = new QGridLayout;
 
     for(unsigned int i =0; i < listOfStates->size(); i++){
