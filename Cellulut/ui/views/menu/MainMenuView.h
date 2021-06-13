@@ -45,7 +45,6 @@ class MainMenuView : public QWidget
         void addModel();
         void addState();
         void delModel();
-        void addSurrounding();
         void delSurrounding();
 };
 
