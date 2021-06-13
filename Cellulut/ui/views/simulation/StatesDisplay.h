@@ -22,9 +22,9 @@ public slots:
 private:
     QGridLayout *layout;
 
-    std::map<int, QWidget*> *mapOfColors;
-    std::map<int, QLabel*> *mapOfLabels;
-    std::map<int, QLCDNumber*> *mapOfCounts;
+    map<int, QWidget*> *mapOfColors;
+    map<int, QLabel*> *mapOfLabels;
+    map<int, QLCDNumber*> *mapOfCounts;
 };
 
 #endif // STATESDISPLAY_H

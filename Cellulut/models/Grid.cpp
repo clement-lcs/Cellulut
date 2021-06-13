@@ -1,53 +1,48 @@
 #include "main.h"
 #include "models/Grid.h"
 
-Grid *Grid::singleton = new Grid;
+Grid* Grid::singleton = new Grid;
 
-Grid::Grid()
-{
-    this->mapCells = new std::map<std::string, Cell *>();
+Grid::Grid(){
+    this->mapCells = new map<string,Cell*>();
 
     qInfo() << "Grid::Grid - constructor";
 }
 
-unsigned int Grid::getSize() const { return this->size; }
+unsigned int Grid::getSize() const{return this->size;}
 
-std::map<std::string, Cell *> *Grid::getCells() const { return this->mapCells; }
+map<string, Cell*>* Grid::getCells() const{return this->mapCells;}
 
-void Grid::setSize(unsigned int _size) { this->size = _size; }
 
-void Grid::setCells(std::map<std::string, Cell *> *_cells) { this->mapCells = _cells; }
+void Grid::setSize(unsigned int _size){this->size = _size;}
 
-void Grid::removeAllCells()
-{
-    std::map<std::string, Cell *>::iterator it;
-    for (std::map<std::string, Cell *>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)
+void Grid::setCells(map<string, Cell*>* _cells){this->mapCells = _cells;}
+
+
+void Grid::removeAllCells(){
+    map<string,Cell*>::iterator it;
+    for(map<std::string, Cell*>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)
     {
         delete (itr->second);
     }
     this->mapCells->clear();
 }
 
-std::map<int, int> Grid::countNbCellsPerState()
-{
-    std::map<int, int> nbCellsPerState;
-    for (std::map<std::string, Cell *>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)
+map<int,int> Grid::countNbCellsPerState(){
+    map<int,int> nbCellsPerState;
+    for(map<std::string, Cell*>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)
     {
         Cell *cell = itr->second;
-        int stateIndex = cell->getState()->getIndex();;
+        int stateIndex = cell->getState()->getIndex();
         int nbStates;
-        if ( nbCellsPerState.find(stateIndex) == nbCellsPerState.end() )
-        {
-            nbCellsPerState.insert ( std::make_pair(stateIndex,1) );
-        }
-        else
-        {
+        if(nbCellsPerState.count(stateIndex) == 0){
+            nbStates = 1;
+        } else {
             nbStates = nbCellsPerState.at(stateIndex);
-            nbStates = nbStates + 1;
-            nbCellsPerState.erase(stateIndex);
-            nbCellsPerState.insert ( std::make_pair(stateIndex,nbStates) );
+            nbStates++;
         }
-
+        nbCellsPerState.insert({stateIndex,nbStates});
+        cout<<nbStates<<endl;
     }
 
     return nbCellsPerState;
