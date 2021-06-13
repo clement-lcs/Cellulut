@@ -47,8 +47,5 @@ HEADERS += \
     ui/views/simulation/SimulationBoard.h \
     ui/views/simulation/StatesDisplay.h
 
-FORMS += \
-    Form.ui
-
 RESOURCES += \
     Cellulut.qrc
