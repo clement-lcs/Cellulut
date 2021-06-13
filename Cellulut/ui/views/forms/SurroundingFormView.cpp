@@ -49,5 +49,5 @@ void SurroundingFormView::onClickSubmit(){
     newSurrounding->setRadius(surroundingRadius);
     newSurrounding->setInteraction(this->board->getBoardAsVector());
 
-    this->uiEngine->changeToMainMenuView();
+    this->uiEngine->changeToLibraryView();
 }

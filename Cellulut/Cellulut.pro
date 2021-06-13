@@ -17,6 +17,7 @@ SOURCES += \
     ui/views/forms/LoadModelFormView.cpp \
     ui/views/forms/SurroundingBoard.cpp \
     ui/views/forms/SurroundingFormView.cpp \
+    ui/views/library/LibraryView.cpp \
     ui/views/menu/MainMenuView.cpp \
     ui/views/simulation/SimulationButtonsBar.cpp \
     ui/views/simulation/SimulationThread.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     ui/views/forms/LoadModelFormView.h \
     ui/views/forms/SurroundingBoard.h \
     ui/views/forms/SurroundingFormView.h \
+    ui/views/library/LibraryView.h \
     ui/views/menu/MainMenuView.h \
     ui/views/simulation/SimulationButtonsBar.h \
     ui/views/simulation/SimulationThread.h \

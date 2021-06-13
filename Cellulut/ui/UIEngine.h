@@ -7,6 +7,7 @@
 #include "views/simulation/SimulationView.h"
 #include "views/forms/LoadModelFormView.h"
 #include "views/forms/SurroundingFormView.h"
+#include "views/library/LibraryView.h"
 
 class MainWindow;
 
@@ -26,6 +27,7 @@ public slots:
     void changeToSimulationView();
     void changeToLoadModelFormView();
     void changeToCreateSurroundingFormView();
+    void changeToLibraryView();
 };
 
 #endif // UIENGINE_H
