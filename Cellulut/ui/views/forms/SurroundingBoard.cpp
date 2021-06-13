@@ -1,6 +1,6 @@
 #include "SurroundingBoard.h"
 
-SurroundingBoard::SurroundingBoard(QWidget *parent) : QFrame(parent)
+SurroundingBoard::SurroundingBoard(QWidget *parent, vector<bool>*listOfInteractions, int boardSize) : QFrame(parent)
 {
     setFrameStyle(QFrame::Panel|QFrame::Sunken);
     setFocusPolicy(Qt::StrongFocus);
@@ -9,7 +9,19 @@ SurroundingBoard::SurroundingBoard(QWidget *parent) : QFrame(parent)
     setFixedWidth(400);
 
     this->board = new map<string, bool>();
-    this->changeBoardSize("1");
+
+    if(listOfInteractions != 0 && boardSize != -1){
+        this->boardSize = boardSize*2+1;
+        for(int i =0; i < this->boardSize*this->boardSize;i++){
+            bool interaction = listOfInteractions->at(i);
+            int posX = i%this->boardSize;
+            int posY = i/this->boardSize;
+            this->board->insert({this->getHashFromPos(posX,posY), interaction});
+        }
+        update();
+    } else {
+        this->changeBoardSize("1");
+    }
 
     qInfo() << "SurroundingBoard::SurroundingBoard - constructor";
 }
@@ -20,6 +32,8 @@ SurroundingBoard::~SurroundingBoard()
 }
 
 void SurroundingBoard::changeBoardSize(QString newSizeAsStr){
+    qInfo() << "SurroundingBoard::changeBoardSize - change board size to "<<newSizeAsStr;
+
     int newSize = newSizeAsStr.toInt();
     this->board->clear();
     this->boardSize = newSize*2+1;

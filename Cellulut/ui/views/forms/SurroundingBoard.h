@@ -7,7 +7,7 @@ class SurroundingBoard : public QFrame
 {
     Q_OBJECT;
     public:
-        SurroundingBoard(QWidget *parent = nullptr);
+        SurroundingBoard(QWidget *parent = nullptr, vector<bool> *listOfInteractions = nullptr, int boardSize = -1);
         ~SurroundingBoard();
 
         map<string, bool>* getBoard() const {return this->board;}

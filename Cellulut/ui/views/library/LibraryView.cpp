@@ -81,8 +81,8 @@ void LibraryView::onViewSurroundingButtonClicked()
 {
     qInfo() << "LibraryView::onViewSurroundingButtonClicked";
 
-    QObject* obj = sender();
-    qInfo() << obj->objectName();
+    int surroundingIndex = this->getIDFromObjectName(sender());
+    this->uiEngine->changeToEditSurroundingFormView(surroundingIndex);
 }
 
 void LibraryView::onDeleteSurroundingButtonClicked()
