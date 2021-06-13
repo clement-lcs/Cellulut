@@ -207,6 +207,9 @@ void SimulationView::onClickStart()
     this->sliderSize->setDisabled(true);
     this->randomInitializationButton->setDisabled(true);
     this->simulationThread->start();
+
+    // Disable menu bar during simulation
+    this->uiEngine->getMainWindow()->menuBar()->setDisabled(true);
 }
 
 void SimulationView::onClickStop()
@@ -227,6 +230,9 @@ void SimulationView::onClickStop()
     this->inputSize->setDisabled(false);
     this->sliderSize->setDisabled(false);
     this->randomInitializationButton->setDisabled(false);
+
+    // Enable menu bar after simulation
+    this->uiEngine->getMainWindow()->menuBar()->setDisabled(false);
 }
 
 void SimulationView::onClickIncreaseSpeed()
