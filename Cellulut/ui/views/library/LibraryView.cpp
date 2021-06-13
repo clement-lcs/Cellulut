@@ -69,7 +69,7 @@ LibraryView::LibraryView(QWidget *parent, UIEngine *_uiEngine) : QWidget(parent)
 
     this->setLayout(this->gridLayout);
 
-    qInfo() << "LibraryView::LibraryView - constructor";
+    //qInfo() << "LibraryView::LibraryView - constructor";
 }
 
 LibraryView::~LibraryView()
@@ -80,15 +80,16 @@ LibraryView::~LibraryView()
 
 void LibraryView::onViewSurroundingButtonClicked()
 {
-    qInfo() << "LibraryView::onViewSurroundingButtonClicked";
+    //qInfo() << "LibraryView::onViewSurroundingButtonClicked";
 
     QObject* obj = sender();
     qInfo() << obj->objectName();
 }
 
+
 void LibraryView::onDeleteSurroundingButtonClicked()
 {
-    qInfo() << "LibraryView::onDeleteSurroundingButtonClicked";
+    //qInfo() << "LibraryView::onDeleteSurroundingButtonClicked";
 
     int surroundingIndex = this->getIDFromObjectName(sender());
     Library::getLibrary()->del_Surrounding(surroundingIndex);
@@ -97,7 +98,7 @@ void LibraryView::onDeleteSurroundingButtonClicked()
 
 void LibraryView::onDeleteModelButtonClicked()
 {
-    qInfo() << "LibraryView::onDeleteModelButtonClicked";
+    //qInfo() << "LibraryView::onDeleteModelButtonClicked";
 
     int modelIndex = this->getIDFromObjectName(sender());
     Library::getLibrary()->del_Model(modelIndex);

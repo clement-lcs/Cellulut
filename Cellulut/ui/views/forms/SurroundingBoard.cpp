@@ -11,12 +11,12 @@ SurroundingBoard::SurroundingBoard(QWidget *parent) : QFrame(parent)
     this->board = new map<string, bool>();
     this->changeBoardSize("1");
 
-    qInfo() << "SurroundingBoard::SurroundingBoard - constructor";
+    //qInfo() << "SurroundingBoard::SurroundingBoard - constructor";
 }
 
 SurroundingBoard::~SurroundingBoard()
 {
-    qInfo() << "SurroundingBoard::~SurroundingBoard - destructor";
+    //qInfo() << "SurroundingBoard::~SurroundingBoard - destructor";
 }
 
 void SurroundingBoard::changeBoardSize(QString newSizeAsStr){

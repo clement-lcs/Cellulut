@@ -5,6 +5,16 @@
 #include "models/Model.h"
 #include "models/Surrounding.h"
 
+/*!
+ *  \file Library.h
+ *  This file contains the Library class
+ */
+
+
+/*!
+ * \brief The Library class
+ */
+
 class Library // Singleton
 {
     protected :

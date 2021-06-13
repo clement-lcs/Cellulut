@@ -9,7 +9,16 @@
 #include "views/forms/SurroundingFormView.h"
 #include "views/library/LibraryView.h"
 
+/*!
+ *  \file UIEngine.h
+ *  This file contains the UIEngine class
+ */
+
 class MainWindow;
+
+/*!
+ * \brief The UIEngine class
+ */
 
 class UIEngine : public QObject
 {

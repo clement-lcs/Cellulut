@@ -26,8 +26,7 @@ class MainMenuView : public QWidget
         QDialog* addModelMenu;
         QDialog* addStateMenu;
         QDialog* delModelMenu;
-        QDialog* addSurroundingMenu;
-        QDialog* delSurroundingMenu;
+        QDialog* setSurroundingMenu;
         QDialog* addRuleMenu;
 
         QLineEdit* model_name;
@@ -37,16 +36,32 @@ class MainMenuView : public QWidget
         QLineEdit* state_label;
         QComboBox* colorsCombo;
 
-        QComboBox *modelCombo;
-        QStringListModel *modelComboModel;
+        QComboBox* modelCombo;
+        QStringListModel* modelComboModel;
+
+        QComboBox* surroundingCombo;
+        QStringListModel* surroundingComboModel;
+
+        QComboBox* currentStateCombo;
+        QStringListModel* currentStateComboModel;
+
+        QSpinBox* nb_states_nearby;
+
+        QComboBox* stateNearbyCombo;
+        QStringListModel* stateNearbyComboModel;
+
+        QComboBox* nextStateCombo;
+        QStringListModel* nextStateComboModel;
 
     private slots:
         void editLibrary();
         void addModel();
         void addState();
-        void delModel();
-        void delSurrounding();
+        void setSurrounding();
+        void onClickSubmitSetSurrounding();
         void addRule();
+        void onClickSubmitAddRule();
+        void delModel();
         void onClickSubmitDelModel();
 };
 

@@ -32,18 +32,22 @@ Surrounding* Library::get_Surrounding(unsigned int surrounding_id)
 
 void Library::del_Surrounding(unsigned int surrounding_id)
 {
-    qInfo() <<"del_Surrounding with id "+QString::number(surrounding_id);
-    for(unsigned int i = 0; i < listSurroundings->size(); i++)
+    if (surrounding_id > Library::getLibrary()->getListSurroundings()->size() - 1)
     {
-        Surrounding *current = listSurroundings->at(i);
-        if(current->getId_Surrounding() == surrounding_id)
-        {
-            listSurroundings->erase(listSurroundings->begin()+i);
-            cout<<"Surrounding deleted"<<endl;
-            return;
-        }
+        cout<<"This surrounding doesn't exist"<<endl;
     }
-    qInfo() <<"This surrounding doesn't exist";
+    else if (surrounding_id == 0 or surrounding_id == 1)
+    {
+        cout<<"You can't delete pre-existing surrounding"<<endl;
+    }
+    else {
+        for(unsigned int i=surrounding_id; i < getLibrary()->getListSurroundings()->size(); i++)
+        {
+            this->getListSurroundings()->at(i)->id_surrounding--;
+        }
+        cout<<"Surrounding '"<<this->getListSurroundings()->at(surrounding_id)->getName()<<"' deleted"<<endl;
+        this->listSurroundings->erase(this->listSurroundings->begin()+surrounding_id);
+    }
     return;
 }
 
