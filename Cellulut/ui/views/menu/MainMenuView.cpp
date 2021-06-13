@@ -19,7 +19,8 @@ MainMenuView::MainMenuView(QWidget *_parent, UIEngine *_uiEngine) : QWidget(_par
     this->gridLayout->addWidget(this->createModelButton,1,1,1,1);
     this->setLayout(gridLayout);
 
-    connect(this->editLibraryButton, &QPushButton::clicked, this, &MainMenuView::editLibrary);
+    //connect(this->editLibraryButton, &QPushButton::clicked, this, &MainMenuView::editLibrary);
+    connect(this->editLibraryButton, &QPushButton::clicked, this->uiEngine, &UIEngine::changeToLibraryView);
     connect(this->createModelButton, &QPushButton::clicked, this, &MainMenuView::addModel);
 
     qInfo() << "MainMenuView::MainMenuView - constructor";

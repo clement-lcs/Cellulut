@@ -26,23 +26,25 @@ Surrounding* Library::get_Surrounding(unsigned int surrounding_id)
             return listSurroundings->at(i);
         }
     }
-    cout<<"This surrounding doesn't exist";
+    qInfo() <<"This surrounding doesn't exist";
     return nullptr;
 }
 
 void Library::del_Surrounding(unsigned int surrounding_id)
 {
-    /*for(unsigned int i = 0; i < listSurroundings->size(); i++)
+    qInfo() <<"del_Surrounding with id "+QString::number(surrounding_id);
+    for(unsigned int i = 0; i < listSurroundings->size(); i++)
     {
-        if(listSurroundings->at(i) == _surrounding)
+        Surrounding *current = listSurroundings->at(i);
+        if(current->getId_Surrounding() == surrounding_id)
         {
             listSurroundings->erase(listSurroundings->begin()+i);
             cout<<"Surrounding deleted"<<endl;
             return;
         }
     }
-    cout<<"This surrounding doesn't exist";
-    return;*/
+    qInfo() <<"This surrounding doesn't exist";
+    return;
 }
 
 
