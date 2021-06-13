@@ -110,82 +110,116 @@ void MainMenuView::addModel()
 
 void MainMenuView::addState()
 {
-    if (this->states_added == nb_states->value())
+    if (!this->states_added)
+        Library::getLibrary()->create_Model(this->model_name->text().toStdString()); // Adding model to library
+
+    else if(this->states_added > 0)
+        Library::getLibrary()->getListModels()->at(Library::getLibrary()->getListModels()->size()-1)->add_State(new State(states_added-1, this->state_label->text().toStdString(), this->colorsCombo->currentText().toStdString())); // State dead added
+
+    if (this->states_added == this->nb_states->value())
         return;
 
     QPushButton *next = new QPushButton("Next");
 
+    QHBoxLayout *controlButtons = new QHBoxLayout;
+    controlButtons->addWidget(next);
+
+    this->states_added += 1;
+    this->state_label = new QLineEdit;
+
+    this->colorsCombo = new QComboBox();
+    this->colorsCombo->addItem("white");
+    this->colorsCombo->addItem("red");
+    this->colorsCombo->addItem("orange");
+    this->colorsCombo->addItem("yellow");
+    this->colorsCombo->addItem("green");
+    this->colorsCombo->addItem("blue");
+    this->colorsCombo->addItem("violet");
+    this->colorsCombo->addItem("black");
+
+    QFormLayout *form = new QFormLayout;
+    form->addRow("Label:", state_label);
+    form->addRow("Couleur:", colorsCombo);
+
     QVBoxLayout *addStateLayout = new QVBoxLayout;
-    //addStateLayout->addLayout(form);
-    addStateLayout->addWidget(next);
+    addStateLayout->addLayout(form);
+    addStateLayout->addLayout(controlButtons);
 
     this->addStateMenu = new QDialog(this);
     this->addStateMenu->setWindowTitle("New state");
     this->addStateMenu->setModal(true);
-    this->addModelMenu->setLayout(addStateLayout);
+    this->addStateMenu->setLayout(addStateLayout);
     this->addStateMenu->show();
 
-    this->states_added += 1;
 
     QObject::connect(next,&QPushButton::clicked,this,&MainMenuView::addState);
-
-    /*//Creation du Modele selon les infos récupérés dans defineState
-    if(added==0)
-        Library::getLibrary()->create_Model(nom->text().toStdString()); //Le modele est ajouté à la fin de la liste
-
-
-    //Ajout de l'Etat récupérés dans l'appel à defineStates précedent
-    if(added>0)     Library::getLibrary()->getListModels()->at(Library::getLibrary()->getListModels()->size()-1)->add_State(new State(added-1, label->text().toStdString(), nom->text().toStdString())); // State dead added
-
-
-    if (added==nb->value())
-        return;
-
-    added++;
-
-    label = new QLineEdit;
-    nom = new QLineEdit("black");
-
-    QPushButton *suivant = new QPushButton("Suivant");
-
-    QFormLayout *form = new QFormLayout;
-        form->addRow("label:", label);
-        form->addRow("Couleur:", nom);
-
-    QVBoxLayout *vertical = new QVBoxLayout;
-        vertical->addLayout(form);
-        vertical->addWidget(suivant);
-
-    label->setText(QString::number(added-1));
-
-    infos = new QDialog(this);
-        QString concat = "Definir Etat n°" + QString::number(added);
-        infos->setWindowTitle(concat);
-        infos->setModal(true);
-        infos->setLayout(vertical);
-        infos->show();
-
-    QObject::connect(suivant,&QPushButton::clicked,this,&MainMenuView::addState);
-    QObject::connect(suivant,&QPushButton::clicked,infos,&QDialog::close);*/
-
+    if (this->states_added == this->nb_states->value())
+        QObject::connect(next,&QPushButton::clicked,this,&MainMenuView::addRule);
+    QObject::connect(next,&QPushButton::clicked,this->addStateMenu,&QDialog::close);
 }
 
 
 void MainMenuView::delModel()
 {
+
+    QStringList modelComboStringList;
+    vector<Model*> *listOfModels = Library::getLibrary()->getListModels();
+    for(unsigned int i = 3; i < listOfModels->size(); i++){
+        modelComboStringList << listOfModels->at(i)->getTitleAsQString();
+    }
+
+    QPushButton *cancel = new QPushButton("Return");
+    QPushButton *confirm = new QPushButton("Confirm");
+
+    this->modelComboModel = new QStringListModel();
+    this->modelComboModel->setStringList(modelComboStringList);
+
+    this->modelCombo = new QComboBox();
+    this->modelCombo->setModel(modelComboModel);
+    this->modelCombo->setToolTip("Impossible de supprimer les modèles pré-existants");
+
+    QFormLayout *form = new QFormLayout;
+    form->addRow("Delete model :", modelCombo);
+
+    QHBoxLayout *controlButtons = new QHBoxLayout;
+    controlButtons->addWidget(cancel);
+    controlButtons->addWidget(confirm);
+
+    QVBoxLayout *delModelLayout = new QVBoxLayout;
+    delModelLayout->addLayout(form);
+    delModelLayout->addLayout(controlButtons);
+
     this->delModelMenu = new QDialog(this);
-    this->delModelMenu->setWindowTitle("Suppression d'un modèle");
+    this->delModelMenu->setWindowTitle("Deleting model");
     this->delModelMenu->setModal(true);
-    //delModelMenu->setLayout(delModelLayout);
+    delModelMenu->setLayout(delModelLayout);
     this->delModelMenu->show();
+
+    QObject::connect(cancel,&QPushButton::clicked,this->delModelMenu,&QDialog::close);
+    QObject::connect(confirm,&QPushButton::clicked,this->delModelMenu,&QDialog::close);
+    QObject::connect(confirm,&QPushButton::clicked,this,&MainMenuView::onClickSubmitDelModel);
+}
+
+void MainMenuView::onClickSubmitDelModel()
+{
+    int selectedModel = this->modelCombo->currentIndex();
+    Library::getLibrary()->del_Model(Library::getLibrary()->getListModels()->at(selectedModel)->getId_Model());
+}
+
+void MainMenuView::addRule()
+{
+    this->addRuleMenu = new QDialog(this);
+    this->addRuleMenu->setWindowTitle("New rule");
+    this->addRuleMenu->setModal(true);
+    //addRuleMenu->setLayout(addRuleLayout);
+    this->addRuleMenu->show();
 }
 
 void MainMenuView::delSurrounding()
 {
     this->delSurroundingMenu = new QDialog(this);
-    this->delSurroundingMenu->setWindowTitle("Suppression d'un voisinage");
+    this->delSurroundingMenu->setWindowTitle("Deleting surrounding");
     this->delSurroundingMenu->setModal(true);
     //delSurroundingMenu->setLayout(delSurroundingLayout);
-    this->delSurroundingMenu->show();
+    this->addRuleMenu->show();
 }
-

@@ -28,17 +28,17 @@ class MainMenuView : public QWidget
         QDialog* delModelMenu;
         QDialog* addSurroundingMenu;
         QDialog* delSurroundingMenu;
+        QDialog* addRuleMenu;
 
         QLineEdit* model_name;
         QSpinBox* nb_states;
         unsigned int states_added;
 
-            QPushButton *color;
-            QColor* couleur;
-            QLineEdit *label;
-            QComboBox* list;
-            QComboBox* list1;
-            QComboBox* list2;
+        QLineEdit* state_label;
+        QComboBox* colorsCombo;
+
+        QComboBox *modelCombo;
+        QStringListModel *modelComboModel;
 
     private slots:
         void editLibrary();
@@ -46,6 +46,8 @@ class MainMenuView : public QWidget
         void addState();
         void delModel();
         void delSurrounding();
+        void addRule();
+        void onClickSubmitDelModel();
 };
 
 #endif // MAINMENUVIEW_H
