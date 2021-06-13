@@ -34,19 +34,20 @@ std::map<int, int> Grid::countNbCellsPerState()
     for (std::map<std::string, Cell *>::iterator itr = this->mapCells->begin(); itr != this->mapCells->end(); itr++)
     {
         Cell *cell = itr->second;
-        int stateIndex = cell->getState()->getIndex();
+        int stateIndex = cell->getState()->getIndex();;
         int nbStates;
-        if (nbCellsPerState.count(stateIndex) == 0)
+        if ( nbCellsPerState.find(stateIndex) == nbCellsPerState.end() )
         {
-            nbStates = 1;
+            nbCellsPerState.insert ( std::make_pair(stateIndex,1) );
         }
         else
         {
             nbStates = nbCellsPerState.at(stateIndex);
-            nbStates++;
+            nbStates = nbStates + 1;
+            nbCellsPerState.erase(stateIndex);
+            nbCellsPerState.insert ( std::make_pair(stateIndex,nbStates) );
         }
-        nbCellsPerState.insert({stateIndex, nbStates});
-        std::cout << nbStates << std::endl;
+
     }
 
     return nbCellsPerState;

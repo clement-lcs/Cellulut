@@ -65,6 +65,8 @@ SimulationView::SimulationView(QWidget *parent, UIEngine *_uiEngine) : QWidget(p
     setupGridLayout();
     initEvents();
 
+    this->statesDisplay->refreshCounters();
+
     qInfo() << "SimulationView::SimulationView - constructor";
 }
 
@@ -122,6 +124,7 @@ void SimulationView::changeGridSize(int newValue)
     Automate::getAutomate()->init_Grid(newValue);
     this->board->refreshGrid();
     this->inputSize->setText(QString::number(newValue));
+    this->statesDisplay->refreshCounters();
 }
 
 void SimulationView::setupGridLayout()
@@ -173,6 +176,7 @@ void SimulationView::generateNextStep()
     if (Automate::getAutomate()->check_stability())
         qInfo() << "Stable configuration";
     this->board->refreshGrid();
+    this->statesDisplay->refreshCounters();
 }
 
 void SimulationView::generateBackStep()
@@ -180,12 +184,14 @@ void SimulationView::generateBackStep()
     if (!Automate::getAutomate()->back_generation())
         qInfo() << "No backtracking possible";
     this->board->refreshGrid();
+    this->statesDisplay->refreshCounters();
 }
 
 void SimulationView::onClickRandomInitialization()
 {
     Automate::getAutomate()->random_init();
     this->board->refreshGrid();
+    this->statesDisplay->refreshCounters();
 }
 
 void SimulationView::onClickStart()
