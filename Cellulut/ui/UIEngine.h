@@ -6,9 +6,8 @@
 #include "views/menu/MainMenuView.h"
 #include "views/simulation/SimulationView.h"
 #include "views/forms/LoadModelFormView.h"
+#include "views/forms/SurroundingFormView.h"
 
-class InsideDataForUI;
-class InsideUIForData;
 class MainWindow;
 
 class UIEngine : public QObject
@@ -24,6 +23,7 @@ public slots:
     void changeToMainMenuView();
     void changeToSimulationView();
     void changeToLoadModelFormView();
+    void changeToCreateSurroundingFormView();
 };
 
 #endif // UIENGINE_H

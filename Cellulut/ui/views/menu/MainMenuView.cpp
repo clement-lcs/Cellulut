@@ -67,7 +67,7 @@ void MainMenuView::editLibrary()
     connect(addModelButton, &QPushButton::clicked, this, &MainMenuView::addModel);
     connect(addModelButton,&QPushButton::clicked,this->editLibraryMenu,&QDialog::close);
     connect(delModelButton, &QPushButton::clicked, this, &MainMenuView::delModel);
-    connect(addSurroundingButton, &QPushButton::clicked, this, &MainMenuView::addSurrounding);
+    connect(addSurroundingButton, &QPushButton::clicked, this->uiEngine, &UIEngine::changeToCreateSurroundingFormView);
     connect(delSurroundingButton, &QPushButton::clicked, this, &MainMenuView::delSurrounding);
     return;
 }
@@ -177,15 +177,6 @@ void MainMenuView::delModel()
     this->delModelMenu->setModal(true);
     //delModelMenu->setLayout(delModelLayout);
     this->delModelMenu->show();
-}
-
-void MainMenuView::addSurrounding()
-{
-    this->addSurroundingMenu = new QDialog(this);
-    this->addSurroundingMenu->setWindowTitle("Ajout d'un voisinage");
-    this->addSurroundingMenu->setModal(true);
-    //addSurroundingMenu->setLayout(addSurroundingLayout);
-    this->addSurroundingMenu->show();
 }
 
 void MainMenuView::delSurrounding()
