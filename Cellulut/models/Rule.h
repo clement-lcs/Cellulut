@@ -27,23 +27,23 @@ class Rule_int
 class Rule_ext
 {
     protected :
-        std::vector<int>* current_config;
+        vector<int>* current_config;
         unsigned int next_state_index;
         unsigned int radius;
     public :
         Rule_ext(unsigned int _index = 0, unsigned int radius = 1);
         ~Rule_ext() = default;
 
-        std::vector<int>* getCurrent_config() const;
+        vector<int>* getCurrent_config() const;
         unsigned int getNext_state_index() const;
         unsigned int getRadius() const;
 
-        void setCurrent_config(std::vector<int>* _config);
+        void setCurrent_config(vector<int>* _config);
         void setNext_state_index(unsigned int _index);
         void setRadius(unsigned int _radius);
 
         void afficher_rule_ext();
-        void addConfigLine(std::vector<int> _configLine);
+        void addConfigLine(vector<int> _configLine);
 };
 
 

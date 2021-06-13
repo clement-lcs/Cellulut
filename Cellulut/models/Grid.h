@@ -6,24 +6,24 @@
 
 class Grid // Singleton
 {
-protected:
-    static Grid *singleton; // Pointer to singleton
-    Grid();                 // Private constructor
-    unsigned int size;
-    std::map<std::string, Cell *> *mapCells;
+    protected :
+        static Grid* singleton; // Pointer to singleton
+        Grid(); // Private constructor
+        unsigned int size;
+        map<string, Cell*> *mapCells;
+    public :
+        static Grid* getGrid() noexcept {return singleton;}
+        ~Grid() = default;
 
-public:
-    static Grid *getGrid() noexcept { return singleton; }
-    ~Grid() = default;
+        unsigned int getSize() const;
+        map<string, Cell*>* getCells() const;
 
-    unsigned int getSize() const;
-    std::map<std::string, Cell *> *getCells() const;
+        void setSize(unsigned int _size);
+        void setCells(map<string, Cell*>* _cells);
 
-    void setSize(unsigned int _size);
-    void setCells(std::map<std::string, Cell *> *_cells);
-
-    void removeAllCells();
-    std::map<int, int> countNbCellsPerState();
+        void removeAllCells();
+        map<int,int> countNbCellsPerState();
 };
+
 
 #endif // GRID_H

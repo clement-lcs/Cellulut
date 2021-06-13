@@ -11,12 +11,12 @@ class Automate // Singleton
         static Automate* singleton; // Pointer to singleton
         Automate(); // Private constructor
         Model* model = nullptr; //current_model
-        std::vector<unsigned int**>* historic = new std::vector<unsigned int**>;
+        vector<unsigned int**>* historic = new vector<unsigned int**>;
     public :
         ~Automate() = default;
 
         Model* getModel() const;
-        std::vector<unsigned int**>* getHistoric() const;
+        vector<unsigned int**>* getHistoric() const;
 
         void setModel(Model* _model);
 

@@ -20,8 +20,6 @@ public:
     UIEngine(QApplication *app);
     void start();
     void initMainWindow();
-
-    MainWindow* getMainWindow() const {return this->mainWindow;}
 public slots:
     void changeToMainMenuView();
     void changeToSimulationView();

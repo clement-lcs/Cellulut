@@ -5,16 +5,12 @@ SOURCES += \
     main.cpp \
     models/Automate.cpp \
     models/Cell.cpp \
-    models/Cellulut.cpp \
     models/Grid.cpp \
     models/Library.cpp \
     models/Model.cpp \
     models/Rule.cpp \
     models/State.cpp \
     models/Surrounding.cpp \
-    models/managers/DatabaseManager.cpp \
-    models/managers/ModelsManager.cpp \
-    models/managers/StatesManager.cpp \
     ui/UIEngine.cpp \
     ui/UIUtils.cpp \
     ui/views/MainWindow.cpp \
@@ -30,16 +26,12 @@ HEADERS += \
     main.h \
     models/Automate.h \
     models/Cell.h \
-    models/Cellulut.h \
     models/Grid.h \
     models/Library.h \
     models/Model.h \
     models/Rule.h \
     models/State.h \
     models/Surrounding.h \
-    models/managers/DatabaseManager.h \
-    models/managers/ModelsManager.h \
-    models/managers/StatesManager.h \
     ui/UIEngine.h \
     ui/UIUtils.h \
     ui/views/MainWindow.h \

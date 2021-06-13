@@ -12,7 +12,7 @@
 #define MIN_SIMULATION_TICK 500
 #define MAX_SIMULATION_SPEED 4
 
-//using namespace std;
+using namespace std;
 
 #include <string>
 #include <iostream>
@@ -48,6 +48,9 @@
 #include <QToolButton>
 #include <QThread>
 #include <QMutex>
+#include <QFormLayout>
+#include <QSpinBox>
+#include <QtWidgets>
 
 #include "ui/UIUtils.h"
 
