@@ -39,7 +39,7 @@ SimulationView::SimulationView(QWidget *parent, UIEngine *_uiEngine) : QWidget(p
 
     // Random configuration button
     this->randomInitializationButton = new QPushButton("Initialisation aléatoire");
-    this->randomInitializationButton->setFont(UIUtils::getFont(12,false,false));
+    this->randomInitializationButton->setFont(UIUtils::getFont(12, false, false));
 
     // Automatic simulation
     this->simulationThread = new SimulationThread(this);
@@ -68,7 +68,8 @@ SimulationView::SimulationView(QWidget *parent, UIEngine *_uiEngine) : QWidget(p
     qInfo() << "SimulationView::SimulationView - constructor";
 }
 
-SimulationView::~SimulationView(){
+SimulationView::~SimulationView()
+{
     delete board;
     delete inputSize;
     delete sliderSize;
@@ -77,9 +78,10 @@ SimulationView::~SimulationView(){
     qInfo() << "SimulationView::SimulationView - destructor";
 }
 
-void SimulationView::initEvents(){
-    connect(sliderSize, &QSlider::valueChanged, this , &SimulationView::updateInputSizeValueFromInt );
-    connect(inputSize, &QLineEdit::textEdited, this , &SimulationView::updateInputSizeValueFromString );
+void SimulationView::initEvents()
+{
+    connect(sliderSize, &QSlider::valueChanged, this, &SimulationView::updateInputSizeValueFromInt);
+    connect(inputSize, &QLineEdit::textEdited, this, &SimulationView::updateInputSizeValueFromString);
     connect(board, &SimulationBoard::initialConfigurationChanged, statesDisplay, &StatesDisplay::refreshCounters);
     connect(simulationButtonsBar, &SimulationButtonsBar::stepForward, this, &SimulationView::generateNextStep);
     connect(simulationButtonsBar, &SimulationButtonsBar::stepBackward, this, &SimulationView::generateBackStep);
@@ -92,56 +94,66 @@ void SimulationView::initEvents(){
     qInfo() << "SimulationView::initEvents - events binded";
 }
 
-void SimulationView::updateInputSizeValueFromInt(int newValue){
+void SimulationView::updateInputSizeValueFromInt(int newValue)
+{
     this->changeGridSize(newValue);
 }
 
-void SimulationView::updateInputSizeValueFromString(QString newValueAsStr){
-    if(newValueAsStr == ""){
+void SimulationView::updateInputSizeValueFromString(QString newValueAsStr)
+{
+    if (newValueAsStr == "")
+    {
         return;
     }
-    for(char const &c: newValueAsStr.toStdString()){
-        if(isdigit(c)==0) return;
+    for (char const &c : newValueAsStr.toStdString())
+    {
+        if (isdigit(c) == 0)
+            return;
     }
     int newValue = newValueAsStr.toInt();
     this->changeGridSize(newValue);
 }
 
-void SimulationView::changeGridSize(int newValue){
-    if(newValue<MIN_GRID_SIZE || newValue>MAX_GRID_SIZE) return;
+void SimulationView::changeGridSize(int newValue)
+{
+    if (newValue < MIN_GRID_SIZE || newValue > MAX_GRID_SIZE)
+        return;
     Grid::getGrid()->removeAllCells();
     Automate::getAutomate()->init_Grid(newValue);
     this->board->refreshGrid();
     this->inputSize->setText(QString::number(newValue));
 }
 
-void SimulationView::setupGridLayout(){
-    this->gridLayout->addWidget(UIUtils::createLabel("Configurer la simulation\nen cliquant sur la grille", 15, true, false), 0, 2,1,4);
-    this->gridLayout->addWidget(this->modelTitle, 1, 0,1,2);
-    this->gridLayout->addWidget(this->modelDescription, 2, 0,1,2);
+void SimulationView::setupGridLayout()
+{
+    this->gridLayout->addWidget(UIUtils::createLabel("Configurer la simulation\nen cliquant sur la grille", 15, true, false), 0, 2, 1, 4);
+    this->gridLayout->addWidget(this->modelTitle, 1, 0, 1, 2);
+    this->gridLayout->addWidget(this->modelDescription, 2, 0, 1, 2);
     this->gridLayout->addWidget(this->modelAuthor, 3, 0);
     this->gridLayout->addWidget(this->modelDate, 3, 1);
-    this->gridLayout->addWidget(this->sizeDisplay, 5, 0, 1,2);
-    this->gridLayout->addWidget(this->sliderSize, 6, 0, 1,2);
+    this->gridLayout->addWidget(this->sizeDisplay, 5, 0, 1, 2);
+    this->gridLayout->addWidget(this->sliderSize, 6, 0, 1, 2);
     this->gridLayout->addWidget(this->randomInitializationButton, 7, 0, 1, 2);
     this->gridLayout->addWidget(this->board, 1, 2, 7, 4);
-    this->gridLayout->addWidget(createLabel("Etats :", "states", 12, false, false), 1, 6,1,2);
-    this->gridLayout->addWidget(this->statesDisplay, 2,6,6,2);
-    this->gridLayout->addWidget(this->simulationButtonsBar, 7,2,1,4);
-    this->gridLayout->addWidget(this->simulationSpeed, 7,6,1,2);
+    this->gridLayout->addWidget(createLabel("Etats :", "states", 12, false, false), 1, 6, 1, 2);
+    this->gridLayout->addWidget(this->statesDisplay, 2, 6, 6, 2);
+    this->gridLayout->addWidget(this->simulationButtonsBar, 7, 2, 1, 4);
+    this->gridLayout->addWidget(this->simulationSpeed, 7, 6, 1, 2);
 }
 
-void SimulationView::setupLabelsForModel(){
+void SimulationView::setupLabelsForModel()
+{
     this->modelTitle = createLabel(this->modelForSimulation->getTitleAsQString(), "modelTitle", 14, true, true);
     this->modelDescription = createLabel(this->modelForSimulation->getDescriptionAsQString(), "modelDescription", 10, false, true);
     this->modelAuthor = createLabel(this->modelForSimulation->getAuthorAsQString(), "modelAuthor", 10, false, false);
     this->modelDate = createLabel(this->modelForSimulation->getDateAsQString(), "modelDate", 10, false, false);
 }
 
-QLabel *SimulationView::createLabel(const QString &text, const QString &objectName, int fontSize, bool isBold, bool isItalic){
+QLabel *SimulationView::createLabel(const QString &text, const QString &objectName, int fontSize, bool isBold, bool isItalic)
+{
     QLabel *label = new QLabel(text);
     label->setObjectName(objectName);
-    label->setAlignment(Qt::AlignHCenter|Qt::AlignCenter);
+    label->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 
     QFont labelFont;
     labelFont.setBold(isBold);
@@ -153,27 +165,31 @@ QLabel *SimulationView::createLabel(const QString &text, const QString &objectNa
     return label;
 }
 
-void SimulationView::generateNextStep(){
+void SimulationView::generateNextStep()
+{
     if (!Automate::getAutomate()->getHistoric()->size())
         Automate::getAutomate()->save_current_config();
     Automate::getAutomate()->next_generation();
-    if(Automate::getAutomate()->check_stability())
+    if (Automate::getAutomate()->check_stability())
         qInfo() << "Stable configuration";
     this->board->refreshGrid();
 }
 
-void SimulationView::generateBackStep(){
-    if(!Automate::getAutomate()->back_generation())
+void SimulationView::generateBackStep()
+{
+    if (!Automate::getAutomate()->back_generation())
         qInfo() << "No backtracking possible";
     this->board->refreshGrid();
 }
 
-void SimulationView::onClickRandomInitialization(){
+void SimulationView::onClickRandomInitialization()
+{
     Automate::getAutomate()->random_init();
     this->board->refreshGrid();
 }
 
-void SimulationView::onClickStart(){
+void SimulationView::onClickStart()
+{
     this->simulationThread->Stop = false;
     if (this->speedFactor == 1)
         this->decreaseSimulationSpeed->setDisabled(true);
@@ -191,9 +207,13 @@ void SimulationView::onClickStart(){
     this->sliderSize->setDisabled(true);
     this->randomInitializationButton->setDisabled(true);
     this->simulationThread->start();
+
+    // Disable menu bar during simulation
+    this->uiEngine->getMainWindow()->menuBar()->setDisabled(true);
 }
 
-void SimulationView::onClickStop(){
+void SimulationView::onClickStop()
+{
     this->simulationThread->Stop = true;
     if (this->speedFactor == 1)
         this->decreaseSimulationSpeed->setDisabled(true);
@@ -210,36 +230,46 @@ void SimulationView::onClickStop(){
     this->inputSize->setDisabled(false);
     this->sliderSize->setDisabled(false);
     this->randomInitializationButton->setDisabled(false);
+
+    // Enable menu bar after simulation
+    this->uiEngine->getMainWindow()->menuBar()->setDisabled(false);
 }
 
-void SimulationView::onClickIncreaseSpeed(){
-    this->speedFactor=this->speedFactor+1;
-    if(this->speedFactor<=MAX_SIMULATION_SPEED){
-        string speedFactorLabel = "x"+std::to_string(this->speedFactor);
+void SimulationView::onClickIncreaseSpeed()
+{
+    this->speedFactor = this->speedFactor + 1;
+    if (this->speedFactor <= MAX_SIMULATION_SPEED)
+    {
+        std::string speedFactorLabel = "x" + std::to_string(this->speedFactor);
         this->simulationSpeedFactorLabel->setText(QString::fromStdString(speedFactorLabel));
-        this->simulationThread->setSleepDuration(MIN_SIMULATION_TICK/this->speedFactor);
-        if(this->speedFactor==MAX_SIMULATION_SPEED){
+        this->simulationThread->setSleepDuration(MIN_SIMULATION_TICK / this->speedFactor);
+        if (this->speedFactor == MAX_SIMULATION_SPEED)
+        {
             this->increaseSimulationSpeed->setDisabled(true);
         }
     }
 
-    if(this->speedFactor>1){
+    if (this->speedFactor > 1)
+    {
         this->decreaseSimulationSpeed->setDisabled(false);
     }
-
 }
 
-void SimulationView::onClickDecreaseSpeed(){
-    this->speedFactor=this->speedFactor-1;
-    if(this->speedFactor>=1){
-        string speedFactorLabel = "x"+std::to_string(this->speedFactor);
+void SimulationView::onClickDecreaseSpeed()
+{
+    this->speedFactor = this->speedFactor - 1;
+    if (this->speedFactor >= 1)
+    {
+        std::string speedFactorLabel = "x" + std::to_string(this->speedFactor);
         this->simulationSpeedFactorLabel->setText(QString::fromStdString(speedFactorLabel));
-        this->simulationThread->setSleepDuration(MIN_SIMULATION_TICK/this->speedFactor);
-        if(this->speedFactor==1){
+        this->simulationThread->setSleepDuration(MIN_SIMULATION_TICK / this->speedFactor);
+        if (this->speedFactor == 1)
+        {
             this->decreaseSimulationSpeed->setDisabled(true);
         }
     }
-    if(this->speedFactor<MAX_SIMULATION_SPEED){
+    if (this->speedFactor < MAX_SIMULATION_SPEED)
+    {
         this->increaseSimulationSpeed->setDisabled(false);
     }
 }

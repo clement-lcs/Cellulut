@@ -11,7 +11,7 @@ private:
 public:
     StatesManager(DatabaseManager *databaseManager);
 
-    vector<State*>* findAllStatesByModelID(int modelID);
+    std::vector<State*>* findAllStatesByModelID(int modelID);
 };
 
 #endif // STATESMANAGER_H

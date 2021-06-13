@@ -11,7 +11,7 @@ private:
 public:
     ModelsManager(DatabaseManager *databaseManager);
 
-    vector<Model*>* findAllModels();
+    std::vector<Model*>* findAllModels();
 };
 
 #endif // MODELSMANAGER_H
