@@ -4,9 +4,9 @@
 #define MAX_STATE 8
 
 #define MIN_GRID_SIZE 5
-#define MAX_GRID_SIZE 79
+#define MAX_GRID_SIZE 66
 
-#define WINDOW_WIDTH 800
+#define WINDOW_WIDTH 900
 #define WINDOW_HEIGHT 600
 
 #define MIN_SIMULATION_TICK 500
@@ -20,6 +20,7 @@ using namespace std;
 #include <vector>
 #include <typeinfo>
 #include <cstdlib>
+#include <windows.h>
 
 #include <QDebug>
 #include <QApplication>

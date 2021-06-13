@@ -41,7 +41,7 @@ private:
     QWidget *sizeDisplay;
     StatesDisplay *statesDisplay;
     SimulationButtonsBar *simulationButtonsBar;
-    QPushButton *randomConfigurationButton;
+    QPushButton *randomInitializationButton;
     QWidget *simulationSpeed;
     QPushButton *increaseSimulationSpeed;
     QPushButton *decreaseSimulationSpeed;
@@ -58,7 +58,8 @@ private:
     void updateInputSizeValueFromInt(int newValue);
     void updateInputSizeValueFromString(QString newValue);
     void generateNextStep();
-    void onClickRandomConfiguration();
+    void generateBackStep();
+    void onClickRandomInitialization();
     void onClickStart();
     void onClickStop();
     void onClickIncreaseSpeed();

@@ -6,22 +6,27 @@
 class SimulationButtonsBar : public QWidget
 {
     Q_OBJECT
-public:
-    SimulationButtonsBar(QWidget *parent = nullptr);
-    ~SimulationButtonsBar();
+    public:
+        SimulationButtonsBar(QWidget *parent = nullptr);
+        ~SimulationButtonsBar();
 
-    void setStartButtonDisabled(bool _disabled){this->startButton->setDisabled(_disabled);}
-    void setStopButtonDisabled(bool _disabled){this->stopButton->setDisabled(_disabled);}
-    void setStepForwardButtonDisabled(bool _disabled){this->stepForwardButton->setDisabled(_disabled);}
-signals:
-    void start();
-    void stepForward();
-    void stop();
-private:
-    QHBoxLayout *hboxLayout;
-    QPushButton *startButton;
-    QPushButton *stepForwardButton;
-    QPushButton *stopButton;
+        void setStartButtonDisabled(bool _disabled){this->startButton->setDisabled(_disabled);}
+        void setStopButtonDisabled(bool _disabled){this->stopButton->setDisabled(_disabled);}
+        void setStepBackwardButtonDisabled(bool _disabled){this->stepBackwardButton->setDisabled(_disabled);}
+        void setStepForwardButtonDisabled(bool _disabled){this->stepForwardButton->setDisabled(_disabled);}
+
+    signals:
+        void start();
+        void stepForward();
+        void stepBackward();
+        void stop();
+
+    private:
+        QHBoxLayout *hboxLayout;
+        QPushButton *startButton;
+        QPushButton *stepBackwardButton;
+        QPushButton *stepForwardButton;
+        QPushButton *stopButton;
 };
 
 #endif // SIMULATIONBUTTONSBAR_H

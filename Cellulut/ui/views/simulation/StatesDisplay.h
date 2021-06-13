@@ -15,8 +15,10 @@ class StatesDisplay : public QWidget
 public:
     StatesDisplay(QWidget *parent = nullptr);
     ~StatesDisplay();
+
 public slots:
     void refreshCounters();
+
 private:
     QGridLayout *layout;
 
