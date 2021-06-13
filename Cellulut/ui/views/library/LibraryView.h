@@ -19,7 +19,6 @@ private:
 
     void onViewSurroundingButtonClicked();
     void onDeleteSurroundingButtonClicked();
-    void onViewModelButtonClicked();
     void onDeleteModelButtonClicked();
     int getIDFromObjectName(QObject *sender);
 };

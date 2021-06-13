@@ -53,16 +53,17 @@ LibraryView::LibraryView(QWidget *parent, UIEngine *_uiEngine) : QWidget(parent)
     vector<Model*> *listOfModels = Library::getLibrary()->getListModels();
     for(unsigned int i = 0; i < listOfModels->size(); i++){
         Model *model = listOfModels->at(i);
+        int modelIndex = model->getId_Model();
         QLineEdit *modelName = new QLineEdit;
         modelName->setText(QString::fromStdString(model->getTitle()));
         modelName->setDisabled(true);
 
-        QPushButton *viewButton = UIUtils::createButton("View/Edit",12);
         QPushButton *deleteButton = UIUtils::createButton("Delete",12);
+        deleteButton->setObjectName("deleteModelButton_"+QString::number(modelIndex));
+        connect(deleteButton, &QPushButton::clicked, this, &LibraryView::onDeleteModelButtonClicked);
 
         this->gridLayout->addWidget(modelName, row, 0, 1, 1);
-        this->gridLayout->addWidget(viewButton, row, 1, 1, 1);
-        this->gridLayout->addWidget(deleteButton, row, 2, 1, 1);
+        this->gridLayout->addWidget(deleteButton, row, 1, 1, 1);
         row = row+1;
     }
 
@@ -94,20 +95,13 @@ void LibraryView::onDeleteSurroundingButtonClicked()
     this->uiEngine->changeToLibraryView();
 }
 
-void LibraryView::onViewModelButtonClicked()
-{
-    qInfo() << "LibraryView::onViewModelButtonClicked";
-
-    QObject* obj = sender();
-    qInfo() << obj->objectName();
-}
-
 void LibraryView::onDeleteModelButtonClicked()
 {
     qInfo() << "LibraryView::onDeleteModelButtonClicked";
 
-    QObject* obj = sender();
-    qInfo() << obj->objectName();
+    int modelIndex = this->getIDFromObjectName(sender());
+    Library::getLibrary()->del_Model(modelIndex);
+    this->uiEngine->changeToLibraryView();
 }
 
 int LibraryView::getIDFromObjectName(QObject *sender)
